@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'SpaceAPI' target in the 'SpaceAPI' project
+//
+
+#ifdef __OBJC__
+  #import <Cocoa/Cocoa.h>
+#endif

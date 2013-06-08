@@ -43,7 +43,7 @@
 				<array class="NSMutableArray" key="NSMenuItems">
 					<object class="NSMenuItem" id="137719095">
 						<reference key="NSMenu" ref="838036850"/>
-						<string key="NSTitle">Toggle</string>
+						<string key="NSTitle">Update</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<object class="NSCustomResource" key="NSOnImage" id="109409909">
@@ -54,6 +54,16 @@
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">NSMenuMixedState</string>
 						</object>
+					</object>
+					<object class="NSMenuItem" id="255472963">
+						<reference key="NSMenu" ref="838036850"/>
+						<bool key="NSIsDisabled">YES</bool>
+						<bool key="NSIsSeparator">YES</bool>
+						<string key="NSTitle"/>
+						<string key="NSKeyEquiv"/>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSOnImage" ref="109409909"/>
+						<reference key="NSMixedImage" ref="239636324"/>
 					</object>
 					<object class="NSMenuItem" id="694665944">
 						<reference key="NSMenu" ref="838036850"/>
@@ -94,11 +104,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">toggleLight:</string>
+						<string key="label">clickUpdate:</string>
 						<reference key="source" ref="976324537"/>
 						<reference key="destination" ref="137719095"/>
 					</object>
-					<int key="connectionID">550</int>
+					<int key="connectionID">553</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -143,6 +153,7 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="694665944"/>
 							<reference ref="137719095"/>
+							<reference ref="255472963"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -156,6 +167,11 @@
 						<reference key="object" ref="137719095"/>
 						<reference key="parent" ref="838036850"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">551</int>
+						<reference key="object" ref="255472963"/>
+						<reference key="parent" ref="838036850"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -167,12 +183,13 @@
 				<string key="536.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="539.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="544.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="551.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">550</int>
+			<int key="maxID">553</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -180,13 +197,13 @@
 					<string key="className">SpaceAPIAppDelegate</string>
 					<string key="superclassName">NSObject</string>
 					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">toggleLight:</string>
+						<string key="NS.key.0">clickUpdate:</string>
 						<string key="NS.object.0">NSMenuItem</string>
 					</object>
 					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">toggleLight:</string>
+						<string key="NS.key.0">clickUpdate:</string>
 						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">toggleLight:</string>
+							<string key="name">clickUpdate:</string>
 							<string key="candidateClassName">NSMenuItem</string>
 						</object>
 					</object>

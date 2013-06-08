@@ -9,17 +9,17 @@
 #import "SpaceAPIAppDelegate.h"
 
 @implementation SpaceAPIAppDelegate {
-  int lightState;
   NSImage *redLight;
   NSImage *greenLight;
+  NSTimer *stateCheckTimer;
 }
 
 - (id)init {
   self = [super init];
   if(self)
   {
-    lightState = 0;
     NSBundle *mainBundle = [NSBundle mainBundle];
+    
     NSString *redLightPath = [mainBundle pathForResource: @"red" ofType: @"png"];
     NSString *greenLightPath = [mainBundle pathForResource: @"green" ofType: @"png"];
 
@@ -30,8 +30,13 @@
   return self;
 }
 
+- (void)onTick:(NSTimer *)timer {
+  [self updateState];
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-  // Insert code here to initialize your application
+  [self updateState];
+  stateCheckTimer = [NSTimer scheduledTimerWithTimeInterval:300.0 target:self selector:@selector(onTick:) userInfo:nil repeats:YES];
 }
 
 - (void)awakeFromNib {
@@ -42,14 +47,23 @@
   self.statusBar.highlightMode = YES;
 }
 
-- (IBAction)toggleLight:(NSMenuItem *)sender {
-  if(lightState == 0) {
+- (void)updateState {
+  NSURL *spaceApiUrl = [NSURL URLWithString:@"http://spaceapi.n39.eu/json"];
+  NSData *apiResponse = [NSData dataWithContentsOfURL:spaceApiUrl];
+  NSError *error = nil;
+
+  NSDictionary *apiData = [NSJSONSerialization JSONObjectWithData:apiResponse options:NSJSONReadingMutableContainers error:&error];
+
+  NSNumber *spaceState = [apiData objectForKey:@"open"];
+  if ([spaceState boolValue] == YES) {
     self.statusBar.image = greenLight;
-    lightState = 1;
   } else {
     self.statusBar.image = redLight;
-    lightState = 0;
   }
+}
+
+- (IBAction)clickUpdate:(NSMenuItem *)sender {
+  [self updateState];
 }
 
 @end

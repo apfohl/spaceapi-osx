@@ -16,6 +16,6 @@
 
 - (id)init;
 
-- (IBAction)toggleLight:(NSMenuItem *)sender;
+- (IBAction)clickUpdate:(NSMenuItem *)sender;
 
 @end

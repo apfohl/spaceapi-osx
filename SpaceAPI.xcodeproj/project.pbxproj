@@ -10,6 +10,8 @@
 		E113805017636AE700D9CBB9 /* blue.png in Resources */ = {isa = PBXBuildFile; fileRef = E113804F17636AE700D9CBB9 /* blue.png */; };
 		E113805317636C7D00D9CBB9 /* Spaces.m in Sources */ = {isa = PBXBuildFile; fileRef = E113805217636C7D00D9CBB9 /* Spaces.m */; };
 		E13D99F517628DC100E81568 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = E13D99F417628DC100E81568 /* red.png */; };
+		E142E51F1764E507002AC863 /* SpaceAPIController.m in Sources */ = {isa = PBXBuildFile; fileRef = E142E51E1764E507002AC863 /* SpaceAPIController.m */; };
+		E142E5221764E7E5002AC863 /* Statuses.m in Sources */ = {isa = PBXBuildFile; fileRef = E142E5211764E7E5002AC863 /* Statuses.m */; };
 		E17A933D17624D1C0061465A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E17A933C17624D1C0061465A /* Cocoa.framework */; };
 		E17A934717624D1C0061465A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E17A934517624D1C0061465A /* InfoPlist.strings */; };
 		E17A934917624D1C0061465A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E17A934817624D1C0061465A /* main.m */; };
@@ -24,6 +26,10 @@
 		E113805117636C7D00D9CBB9 /* Spaces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spaces.h; sourceTree = "<group>"; };
 		E113805217636C7D00D9CBB9 /* Spaces.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Spaces.m; sourceTree = "<group>"; };
 		E13D99F417628DC100E81568 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
+		E142E51D1764E507002AC863 /* SpaceAPIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpaceAPIController.h; sourceTree = "<group>"; };
+		E142E51E1764E507002AC863 /* SpaceAPIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpaceAPIController.m; sourceTree = "<group>"; };
+		E142E5201764E7E5002AC863 /* Statuses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Statuses.h; sourceTree = "<group>"; };
+		E142E5211764E7E5002AC863 /* Statuses.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Statuses.m; sourceTree = "<group>"; };
 		E17A933917624D1C0061465A /* SpaceAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E17A933C17624D1C0061465A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		E17A933F17624D1C0061465A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -96,8 +102,12 @@
 				E17A9365176288C00061465A /* green.png */,
 				E17A934E17624D1C0061465A /* SpaceAPIAppDelegate.h */,
 				E17A934F17624D1C0061465A /* SpaceAPIAppDelegate.m */,
+				E142E51D1764E507002AC863 /* SpaceAPIController.h */,
+				E142E51E1764E507002AC863 /* SpaceAPIController.m */,
 				E113805117636C7D00D9CBB9 /* Spaces.h */,
 				E113805217636C7D00D9CBB9 /* Spaces.m */,
+				E142E5201764E7E5002AC863 /* Statuses.h */,
+				E142E5211764E7E5002AC863 /* Statuses.m */,
 				E17A935117624D1C0061465A /* MainMenu.xib */,
 				E17A934317624D1C0061465A /* Supporting Files */,
 			);
@@ -187,6 +197,8 @@
 				E17A934917624D1C0061465A /* main.m in Sources */,
 				E17A935017624D1C0061465A /* SpaceAPIAppDelegate.m in Sources */,
 				E113805317636C7D00D9CBB9 /* Spaces.m in Sources */,
+				E142E51F1764E507002AC863 /* SpaceAPIController.m in Sources */,
+				E142E5221764E7E5002AC863 /* Statuses.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,12 +10,4 @@
 
 @interface SpaceAPIAppDelegate : NSObject <NSApplicationDelegate>
 
-@property (strong, nonatomic) NSStatusItem *statusItem;
-
-@property (strong, nonatomic) IBOutlet NSMenu *statusMenu;
-
-@property (strong) IBOutlet NSMenuItem *spaceSelection;
-
-- (IBAction)clickUpdateState:(NSMenuItem *)sender;
-
 @end

@@ -12,6 +12,8 @@
 
 @interface SpaceAPIController ()
 
+@property (nonatomic, strong) NSUserDefaults *preferences;
+
 @property (strong) NSStatusItem *statusItem;
 @property (strong) IBOutlet NSMenu *statusMenu;
 
@@ -28,6 +30,22 @@
 @end
 
 @implementation SpaceAPIController
+
+- (id)init {
+  self = [super init];
+  if (self) {
+    self.selectedSpace = [[self preferences] objectForKey:@"selectedSpace"];
+  }
+  return self;
+}
+
+- (NSUserDefaults *)preferences
+{
+  if (!_preferences) {
+    _preferences = [NSUserDefaults standardUserDefaults];
+  }
+  return _preferences;
+}
 
 - (NSImage *)blueLight {
   if (!_blueLight) {
@@ -86,6 +104,12 @@
   if ([self.statusMenu.itemArray count] > 7) {
     [self.statusMenu removeItemAtIndex:6];
   }
+
+  if (self.selectedSpace) {
+    [self updateStatus];
+    [self statusCheckTimer];
+    self.spaceSelection.title = [NSString stringWithFormat:@"Space: %@", self.selectedSpace];
+  }
 }
 
 - (IBAction)clickUpdateStatus:(NSMenuItem *)sender {
@@ -103,6 +127,7 @@
 
   [self updateStatus];
   [self statusCheckTimer];
+  [[self preferences] setObject:self.selectedSpace forKey:@"selectedSpace"];
 }
 
 - (void)updateStatus {

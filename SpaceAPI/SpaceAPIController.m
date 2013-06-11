@@ -12,50 +12,49 @@
 
 @interface SpaceAPIController ()
 
-@property (strong, nonatomic) NSStatusItem *statusItem;
-@property (strong, nonatomic) IBOutlet NSMenu *statusMenu;
+@property (strong) NSStatusItem *statusItem;
+@property (strong) IBOutlet NSMenu *statusMenu;
 
-@property (strong, nonatomic) NSImage *blueLight;
-@property (strong, nonatomic) NSImage *redLight;
-@property (strong, nonatomic) NSImage *greenLight;
+@property (nonatomic, strong) NSImage *blueLight;
+@property (nonatomic, strong) NSImage *redLight;
+@property (nonatomic, strong) NSImage *greenLight;
 
-@property (strong, nonatomic) Spaces *spaces;
-@property (strong, nonatomic) IBOutlet NSMenuItem *spaceSelection;
-@property (strong, nonatomic) NSString *selectedSpace;
+@property (strong) IBOutlet NSMenuItem *spaceSelection;
+@property (strong) NSString *selectedSpace;
 
-@property (strong, nonatomic) Statuses *status;
-@property (strong, nonatomic) NSTimer *statusCheckTimer;
+@property (nonatomic, strong) Statuses *status;
+@property (nonatomic, strong) NSTimer *statusCheckTimer;
 
 @end
 
 @implementation SpaceAPIController
 
 - (NSImage *)blueLight {
-  if(!_blueLight) {
+  if (!_blueLight) {
     _blueLight = [NSImage imageNamed:@"blue"];
   }
   return _blueLight;
 }
 
 - (NSImage *)redLight {
-  if(!_redLight) {
+  if (!_redLight) {
     _redLight = [NSImage imageNamed:@"red"];
   }
   return _redLight;
 }
 
 - (NSImage *)greenLight {
-  if(!_greenLight) {
+  if (!_greenLight) {
     _greenLight = [NSImage imageNamed:@"green"];
   }
   return _greenLight;
 }
 
-- (Spaces *)spaces {
-  if(!_spaces) {
-    _spaces = [[Spaces alloc] init];
+- (Statuses *)status {
+  if (!_status) {
+    _status = [[Statuses alloc] init];
   }
-  return _spaces;
+  return _status;
 }
 
 - (NSTimer *)statusCheckTimer {
@@ -75,7 +74,7 @@
   self.statusItem.menu = self.statusMenu;
   self.statusItem.highlightMode = YES;
 
-  NSArray *spaceNames = [[[self.spaces spaceList] allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+  NSArray *spaceNames = [[self status] getSpaceList];
   for (NSString *name in spaceNames) {
     NSMenuItem *item = [[NSMenuItem alloc] init];
     item.title = name;
@@ -84,8 +83,8 @@
     [self.statusMenu addItem:item];
   }
 
-  if ([self.statusMenu.itemArray count] > 6) {
-    [self.statusMenu removeItemAtIndex:5];
+  if ([self.statusMenu.itemArray count] > 7) {
+    [self.statusMenu removeItemAtIndex:6];
   }
 }
 
@@ -96,27 +95,19 @@
 - (IBAction)selectSpace:(NSMenuItem *)sender {
   self.selectedSpace = [[NSString alloc] initWithString:sender.title];
   self.spaceSelection.title = [NSString stringWithFormat:@"Space: %@", self.selectedSpace];
-  
-  for (NSMenuItem *item in self.statusMenu.itemArray){
+
+  for (NSMenuItem *item in self.statusMenu.itemArray) {
     [item setState:NSOffState];
   }
-  
   [sender setState:NSOnState];
+
   [self updateStatus];
   [self statusCheckTimer];
 }
 
 - (void)updateStatus {
   if (self.selectedSpace) {
-    NSString *url = [[self.spaces spaceList] valueForKey:self.selectedSpace];
-    NSURL *spaceApiUrl = [NSURL URLWithString:url];
-    NSData *apiResponse = [NSData dataWithContentsOfURL:spaceApiUrl];
-    NSError *error = nil;
-
-    NSDictionary *apiData = [NSJSONSerialization JSONObjectWithData:apiResponse options:NSJSONReadingMutableContainers error:&error];
-
-    NSNumber *spaceState = [apiData objectForKey:@"open"];
-    if ([spaceState boolValue] == YES) {
+    if ([[self status] isOpen:self.selectedSpace] == YES) {
       self.statusItem.image = [self greenLight];
     } else {
       self.statusItem.image = [self redLight];

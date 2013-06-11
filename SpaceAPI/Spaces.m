@@ -26,7 +26,7 @@
 }
 
 - (void)fetchSpaces {
-  NSURL *spaceApiDirectoryUrl = [NSURL URLWithString:@"http://spaceapi.net/directory.json?api=0.12"];
+  NSURL *spaceApiDirectoryUrl = [NSURL URLWithString:@"http://spaceapi.net/directory.json"];
   NSData *apiResponse = [NSData dataWithContentsOfURL:spaceApiDirectoryUrl];
   NSError *error = nil;
 

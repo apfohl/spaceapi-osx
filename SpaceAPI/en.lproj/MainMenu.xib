@@ -67,6 +67,14 @@
 						<reference key="NSOnImage" ref="361832023"/>
 						<reference key="NSMixedImage" ref="359876258"/>
 					</object>
+					<object class="NSMenuItem" id="258940035">
+						<reference key="NSMenu" ref="838036850"/>
+						<string key="NSTitle">About SpaceAPI</string>
+						<string key="NSKeyEquiv"/>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSOnImage" ref="361832023"/>
+						<reference key="NSMixedImage" ref="359876258"/>
+					</object>
 					<object class="NSMenuItem" id="694665944">
 						<reference key="NSMenu" ref="838036850"/>
 						<string key="NSTitle">Quit</string>
@@ -122,6 +130,14 @@
 						<reference key="destination" ref="976324537"/>
 					</object>
 					<int key="connectionID">495</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">orderFrontStandardAboutPanel:</string>
+						<reference key="source" ref="1021"/>
+						<reference key="destination" ref="258940035"/>
+					</object>
+					<int key="connectionID">578</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -194,6 +210,7 @@
 							<reference ref="307626581"/>
 							<reference ref="945956191"/>
 							<reference ref="442999510"/>
+							<reference ref="258940035"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -232,6 +249,11 @@
 						<reference key="object" ref="442999510"/>
 						<reference key="parent" ref="838036850"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">577</int>
+						<reference key="object" ref="258940035"/>
+						<reference key="parent" ref="838036850"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -248,12 +270,13 @@
 				<string key="565.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="570.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="576.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="577.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">576</int>
+			<int key="maxID">578</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -268,20 +291,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">SpaceAPIController</string>
 					<string key="superclassName">NSObjectController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="clickUpdateStatus:">NSMenuItem</string>
-						<string key="selectSpace:">NSMenuItem</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="clickUpdateStatus:">
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">clickUpdateStatus:</string>
+						<string key="NS.object.0">NSMenuItem</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">clickUpdateStatus:</string>
+						<object class="IBActionInfo" key="NS.object.0">
 							<string key="name">clickUpdateStatus:</string>
 							<string key="candidateClassName">NSMenuItem</string>
 						</object>
-						<object class="IBActionInfo" key="selectSpace:">
-							<string key="name">selectSpace:</string>
-							<string key="candidateClassName">NSMenuItem</string>
-						</object>
-					</dictionary>
+					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="spaceSelection">NSMenuItem</string>
 						<string key="statusMenu">NSMenu</string>

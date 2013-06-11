@@ -10,4 +10,7 @@
 
 @interface Statuses : NSObject
 
+- (Boolean)isOpen:(NSString *)aSpace;
+- (NSArray *)getSpaceList;
+
 @end

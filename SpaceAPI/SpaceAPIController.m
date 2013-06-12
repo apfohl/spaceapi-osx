@@ -17,7 +17,7 @@
 @property (strong) NSStatusItem *statusItem;
 @property (strong) IBOutlet NSMenu *statusMenu;
 
-@property (nonatomic, strong) NSImage *blueLight;
+@property (nonatomic, strong) NSImage *yellowLight;
 @property (nonatomic, strong) NSImage *redLight;
 @property (nonatomic, strong) NSImage *greenLight;
 
@@ -47,11 +47,11 @@
   return _preferences;
 }
 
-- (NSImage *)blueLight {
-  if (!_blueLight) {
-    _blueLight = [NSImage imageNamed:@"blue"];
+- (NSImage *)yellowLight {
+  if (!_yellowLight) {
+    _yellowLight = [NSImage imageNamed:@"yellow"];
   }
-  return _blueLight;
+  return _yellowLight;
 }
 
 - (NSImage *)redLight {
@@ -88,7 +88,7 @@
 
 - (void)awakeFromNib {
   self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
-  self.statusItem.image = [self blueLight];
+  self.statusItem.image = [self yellowLight];
   self.statusItem.menu = self.statusMenu;
   self.statusItem.highlightMode = YES;
 
@@ -96,6 +96,7 @@
   for (NSString *name in spaceNames) {
     NSMenuItem *item = [[NSMenuItem alloc] init];
     item.title = name;
+    item.image = [self yellowLight];
     item.action = @selector(selectSpace:);
     item.target = self;
     [self.statusMenu addItem:item];

@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E113805017636AE700D9CBB9 /* blue.png in Resources */ = {isa = PBXBuildFile; fileRef = E113804F17636AE700D9CBB9 /* blue.png */; };
 		E113805317636C7D00D9CBB9 /* Spaces.m in Sources */ = {isa = PBXBuildFile; fileRef = E113805217636C7D00D9CBB9 /* Spaces.m */; };
-		E13D99F517628DC100E81568 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = E13D99F417628DC100E81568 /* red.png */; };
 		E142E51F1764E507002AC863 /* SpaceAPIController.m in Sources */ = {isa = PBXBuildFile; fileRef = E142E51E1764E507002AC863 /* SpaceAPIController.m */; };
 		E142E5221764E7E5002AC863 /* Statuses.m in Sources */ = {isa = PBXBuildFile; fileRef = E142E5211764E7E5002AC863 /* Statuses.m */; };
 		E17A933D17624D1C0061465A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E17A933C17624D1C0061465A /* Cocoa.framework */; };
@@ -18,14 +16,18 @@
 		E17A934D17624D1C0061465A /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = E17A934B17624D1C0061465A /* Credits.rtf */; };
 		E17A935017624D1C0061465A /* SpaceAPIAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E17A934F17624D1C0061465A /* SpaceAPIAppDelegate.m */; };
 		E17A935317624D1C0061465A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = E17A935117624D1C0061465A /* MainMenu.xib */; };
-		E17A9366176288C00061465A /* green.png in Resources */ = {isa = PBXBuildFile; fileRef = E17A9365176288C00061465A /* green.png */; };
+		E1F3B5F91768D0A100494913 /* SpaceAPI.iconset in Resources */ = {isa = PBXBuildFile; fileRef = E1F3B5F81768D0A100494913 /* SpaceAPI.iconset */; };
+		E1F3B6001768D0D900494913 /* green.png in Resources */ = {isa = PBXBuildFile; fileRef = E1F3B5FA1768D0D900494913 /* green.png */; };
+		E1F3B6011768D0D900494913 /* green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1F3B5FB1768D0D900494913 /* green@2x.png */; };
+		E1F3B6021768D0D900494913 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = E1F3B5FC1768D0D900494913 /* red.png */; };
+		E1F3B6031768D0D900494913 /* red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1F3B5FD1768D0D900494913 /* red@2x.png */; };
+		E1F3B6041768D0D900494913 /* yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = E1F3B5FE1768D0D900494913 /* yellow.png */; };
+		E1F3B6051768D0D900494913 /* yellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1F3B5FF1768D0D900494913 /* yellow@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E113804F17636AE700D9CBB9 /* blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue.png; sourceTree = "<group>"; };
 		E113805117636C7D00D9CBB9 /* Spaces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spaces.h; sourceTree = "<group>"; };
 		E113805217636C7D00D9CBB9 /* Spaces.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Spaces.m; sourceTree = "<group>"; };
-		E13D99F417628DC100E81568 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
 		E142E51D1764E507002AC863 /* SpaceAPIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpaceAPIController.h; sourceTree = "<group>"; };
 		E142E51E1764E507002AC863 /* SpaceAPIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpaceAPIController.m; sourceTree = "<group>"; };
 		E142E5201764E7E5002AC863 /* Statuses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Statuses.h; sourceTree = "<group>"; };
@@ -43,7 +45,13 @@
 		E17A934E17624D1C0061465A /* SpaceAPIAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpaceAPIAppDelegate.h; sourceTree = "<group>"; };
 		E17A934F17624D1C0061465A /* SpaceAPIAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpaceAPIAppDelegate.m; sourceTree = "<group>"; };
 		E17A935217624D1C0061465A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		E17A9365176288C00061465A /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green.png; sourceTree = "<group>"; };
+		E1F3B5F81768D0A100494913 /* SpaceAPI.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = SpaceAPI.iconset; sourceTree = "<group>"; };
+		E1F3B5FA1768D0D900494913 /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green.png; sourceTree = "<group>"; };
+		E1F3B5FB1768D0D900494913 /* green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green@2x.png"; sourceTree = "<group>"; };
+		E1F3B5FC1768D0D900494913 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
+		E1F3B5FD1768D0D900494913 /* red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red@2x.png"; sourceTree = "<group>"; };
+		E1F3B5FE1768D0D900494913 /* yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellow.png; sourceTree = "<group>"; };
+		E1F3B5FF1768D0D900494913 /* yellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yellow@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +69,7 @@
 		E17A933017624D1C0061465A = {
 			isa = PBXGroup;
 			children = (
+				E1F3B5F81768D0A100494913 /* SpaceAPI.iconset */,
 				E17A934217624D1C0061465A /* SpaceAPI */,
 				E17A933B17624D1C0061465A /* Frameworks */,
 				E17A933A17624D1C0061465A /* Products */,
@@ -97,9 +106,12 @@
 		E17A934217624D1C0061465A /* SpaceAPI */ = {
 			isa = PBXGroup;
 			children = (
-				E113804F17636AE700D9CBB9 /* blue.png */,
-				E13D99F417628DC100E81568 /* red.png */,
-				E17A9365176288C00061465A /* green.png */,
+				E1F3B5FA1768D0D900494913 /* green.png */,
+				E1F3B5FB1768D0D900494913 /* green@2x.png */,
+				E1F3B5FC1768D0D900494913 /* red.png */,
+				E1F3B5FD1768D0D900494913 /* red@2x.png */,
+				E1F3B5FE1768D0D900494913 /* yellow.png */,
+				E1F3B5FF1768D0D900494913 /* yellow@2x.png */,
 				E17A934E17624D1C0061465A /* SpaceAPIAppDelegate.h */,
 				E17A934F17624D1C0061465A /* SpaceAPIAppDelegate.m */,
 				E142E51D1764E507002AC863 /* SpaceAPIController.h */,
@@ -181,9 +193,13 @@
 				E17A934717624D1C0061465A /* InfoPlist.strings in Resources */,
 				E17A934D17624D1C0061465A /* Credits.rtf in Resources */,
 				E17A935317624D1C0061465A /* MainMenu.xib in Resources */,
-				E17A9366176288C00061465A /* green.png in Resources */,
-				E13D99F517628DC100E81568 /* red.png in Resources */,
-				E113805017636AE700D9CBB9 /* blue.png in Resources */,
+				E1F3B5F91768D0A100494913 /* SpaceAPI.iconset in Resources */,
+				E1F3B6001768D0D900494913 /* green.png in Resources */,
+				E1F3B6011768D0D900494913 /* green@2x.png in Resources */,
+				E1F3B6021768D0D900494913 /* red.png in Resources */,
+				E1F3B6031768D0D900494913 /* red@2x.png in Resources */,
+				E1F3B6041768D0D900494913 /* yellow.png in Resources */,
+				E1F3B6051768D0D900494913 /* yellow@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

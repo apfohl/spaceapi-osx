@@ -19,18 +19,20 @@
 @property (nonatomic, strong) NSMenu *spaceList;
 @property (nonatomic, strong) NSDictionary *spacesDirectory;
 
+@property (nonatomic, strong) NSTimer *statusCheckTimer;
+
 @end
 
 @implementation SpaceAPIController {
-  NSOperationQueue *renderQueue;
-  NSOperationQueue *fetchQueue;
+  NSOperationQueue *_workerQueue;
+  NSString *_selectedSpace;
 }
 
 - (id)init {
   self = [super init];
   if (self) {
-    renderQueue = [[NSOperationQueue alloc] init];
-    fetchQueue = [[NSOperationQueue alloc] init];
+    _workerQueue = [[NSOperationQueue alloc] init];
+    _selectedSpace = [self.preferences objectForKey:@"selectedSpace"];
   }
   return self;
 }
@@ -70,6 +72,17 @@
   return _spaceList;
 }
 
+- (NSTimer *)statusCheckTimer {
+  if (!_statusCheckTimer) {
+    _statusCheckTimer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(checkStatus:) userInfo:nil repeats:YES];
+  }
+  return _statusCheckTimer;
+}
+
+- (IBAction)checkStatus:(id)sender {
+  [self updateSelectedSpace];
+}
+
 - (void)awakeFromNib {
   self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
   self.statusItem.image = self.yellowLight;
@@ -77,57 +90,86 @@
   self.statusItem.highlightMode = YES;
 
   self.spaces.submenu = self.spaceList;
+  if (_selectedSpace) {
+    self.spaceSelection.title = [[NSString alloc] initWithFormat:@"Space: %@", _selectedSpace];
+    [self statusCheckTimer];
+  }
+}
 
-  [fetchQueue addOperationWithBlock:^(void) {
-    NSURL *spaceAPIDirectoryUrl = [NSURL URLWithString:@"http://spaceapi.net/directory.json"];
-    NSURLRequest *spaceAPIDirectoryRequest = [[NSURLRequest alloc] initWithURL:spaceAPIDirectoryUrl];
-    [NSURLConnection sendAsynchronousRequest:spaceAPIDirectoryRequest queue:renderQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-      if (data && !error) {
-        self.spacesDirectory = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        for (NSString *name in [[self.spacesDirectory allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)]) {
-          NSMenuItem *spaceItem = [[NSMenuItem alloc] initWithTitle:name action:@selector(selectSpace:) keyEquivalent:@""];
-          spaceItem.target = self;
-          spaceItem.image = self.yellowLight;
+- (void)updateSpaceDirectory {
+  NSURL *spaceAPIDirectoryUrl = [NSURL URLWithString:@"http://spaceapi.net/directory.json"];
+  NSURLRequest *spaceAPIDirectoryRequest = [[NSURLRequest alloc] initWithURL:spaceAPIDirectoryUrl];
+  [NSURLConnection sendAsynchronousRequest:spaceAPIDirectoryRequest queue:_workerQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+    if (data && !error) {
+      self.spacesDirectory = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
 
+      [[NSOperationQueue mainQueue] addOperationWithBlock:^(void) {
+        [self updateSelectedSpace];
+      }];
+
+      for (NSString *name in [[self.spacesDirectory allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)]) {
+        NSMenuItem *spaceItem = [[NSMenuItem alloc] initWithTitle:name action:@selector(selectSpace:) keyEquivalent:@""];
+        spaceItem.target = self;
+        spaceItem.image = self.yellowLight;
+
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^(void) {
           [self updateSpaceStatusWith:spaceItem];
           [self.spaceList addItem:spaceItem];
-        }
+        }];
       }
-    }];
+    }
   }];
 }
 
-- (void)updateSpaceStatusWith:(NSMenuItem *)menuItem {
-  [fetchQueue addOperationWithBlock:^(void) {
-    NSURL *spaceAPIUrl = [NSURL URLWithString:[self.spacesDirectory objectForKey:menuItem.title]];
-    NSURLRequest *spaceAPIRequest = [[NSURLRequest alloc] initWithURL:spaceAPIUrl];
-    [NSURLConnection sendAsynchronousRequest:spaceAPIRequest queue:renderQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-      if (data && !error) {
-        NSError *jsonError;
-        NSDictionary *spaceData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
+- (void)updateSpaceStatusWith:(id)object {
+  NSURL *spaceAPIUrl;
+  
+  if ([object isKindOfClass:[NSMenuItem class]]) {
+    spaceAPIUrl = [NSURL URLWithString:[self.spacesDirectory objectForKey:((NSMenuItem *)object).title]];
+  } else if ([object isKindOfClass:[NSStatusItem class]]) {
+    spaceAPIUrl = [NSURL URLWithString:[self.spacesDirectory objectForKey:_selectedSpace]];
+  }
 
-        if (!jsonError) {
-          NSNumber *openStatus;
-          NSString *version = [[NSString alloc] initWithFormat:@"%@", [spaceData objectForKey:@"api"]];;
-          if ([version isEqualToString:@"0.11"] || [version isEqualToString:@"0.12"]) {
-            openStatus = [spaceData objectForKey:@"open"];
-          } else if ([version isEqualToString:@"0.13"]) {
-            openStatus = [[spaceData objectForKey:@"state"] objectForKey:@"open"];
-          }
+  NSURLRequest *spaceAPIRequest = [[NSURLRequest alloc] initWithURL:spaceAPIUrl];
+  [NSURLConnection sendAsynchronousRequest:spaceAPIRequest queue:_workerQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+    if (data && !error) {
+      NSError *jsonError;
+      NSDictionary *spaceData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
 
-          if ([openStatus boolValue]) {
-            menuItem.image = self.greenLight;
-          } else {
-            menuItem.image = self.redLight;
-          }
+      if (!jsonError) {
+        NSNumber *openStatus;
+        NSString *version = [[NSString alloc] initWithFormat:@"%@", [spaceData objectForKey:@"api"]];;
+        if ([version isEqualToString:@"0.11"] || [version isEqualToString:@"0.12"]) {
+          openStatus = [spaceData objectForKey:@"open"];
+        } else if ([version isEqualToString:@"0.13"]) {
+          openStatus = [[spaceData objectForKey:@"state"] objectForKey:@"open"];
+        }
+
+        if ([object isKindOfClass:[NSMenuItem class]]) {
+          ((NSMenuItem *)object).image = [openStatus boolValue] ? self.greenLight : self.redLight;
+        } else if ([object isKindOfClass:[NSStatusItem class]]) {
+          ((NSStatusItem *)object).image = [openStatus boolValue] ? self.greenLight : self.redLight;
         }
       }
-    }];
+    }
   }];
+}
+
+- (void)updateSelectedSpace {
+  [self updateSpaceStatusWith:self.statusItem];
+}
+
+- (IBAction)pressUpdateStatus:(NSMenuItem *)sender {
+  [self updateSelectedSpace];
 }
 
 - (IBAction)selectSpace:(NSMenuItem *)sender {
-  NSLog(@"%@", sender.title);
+  _selectedSpace = sender.title;
+  [self.preferences setObject:[[NSString alloc] initWithFormat:@"%@", _selectedSpace] forKey:@"selectedSpace"];
+
+  self.spaceSelection.title = [[NSString alloc] initWithFormat:@"Space: %@", _selectedSpace];
+  [self updateSpaceStatusWith:self.statusItem];
+  [self statusCheckTimer];
 }
 
 @end

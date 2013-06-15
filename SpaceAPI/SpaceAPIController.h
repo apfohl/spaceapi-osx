@@ -10,6 +10,13 @@
 
 @interface SpaceAPIController : NSObjectController
 
-- (IBAction)clickUpdateStatus:(NSMenuItem *)sender;
+@property (strong) NSStatusItem *statusItem;
+@property (weak) IBOutlet NSMenu *mainMenu;
+@property (weak) IBOutlet NSMenuItem *spaces;
+@property (weak) IBOutlet NSMenuItem *spaceSelection;
+
+- (IBAction)selectSpace:(NSMenuItem *)sender;
+- (IBAction)pressUpdateStatus:(NSMenuItem *)sender;
+- (void)updateSpaceDirectory;
 
 @end

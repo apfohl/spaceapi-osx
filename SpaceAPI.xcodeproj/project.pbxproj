@@ -7,15 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E18F847E177F47FC006BB524 /* green.png in Resources */ = {isa = PBXBuildFile; fileRef = E18F847B177F47FC006BB524 /* green.png */; };
+		E18F847F177F47FC006BB524 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = E18F847C177F47FC006BB524 /* red.png */; };
+		E18F8480177F47FC006BB524 /* yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = E18F847D177F47FC006BB524 /* yellow.png */; };
+		E1A2184A177F831500D0C720 /* SAPISpace.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A21849177F831500D0C720 /* SAPISpace.m */; };
 		E1B3B09B177D9A2E00209F6D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1B3B09A177D9A2E00209F6D /* Cocoa.framework */; };
 		E1B3B0A5177D9A2E00209F6D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1B3B0A3177D9A2E00209F6D /* InfoPlist.strings */; };
 		E1B3B0A7177D9A2E00209F6D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B3B0A6177D9A2E00209F6D /* main.m */; };
 		E1B3B0AB177D9A2E00209F6D /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = E1B3B0A9177D9A2E00209F6D /* Credits.rtf */; };
 		E1B3B0AE177D9A2E00209F6D /* SAPIAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B3B0AD177D9A2E00209F6D /* SAPIAppDelegate.m */; };
 		E1B3B0B1177D9A2E00209F6D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1B3B0AF177D9A2E00209F6D /* MainMenu.xib */; };
+		E1B3B0B9177D9BC400209F6D /* SAPIAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B3B0B8177D9BC400209F6D /* SAPIAppController.m */; };
+		E1B3B0BF177D9C4B00209F6D /* SAPIPreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B3B0BE177D9C4B00209F6D /* SAPIPreferenceController.m */; };
+		E1B3B0C1177DE31F00209F6D /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1B3B0C0177DE31F00209F6D /* Preferences.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E18F847B177F47FC006BB524 /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green.png; sourceTree = "<group>"; };
+		E18F847C177F47FC006BB524 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
+		E18F847D177F47FC006BB524 /* yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellow.png; sourceTree = "<group>"; };
+		E1A21848177F831500D0C720 /* SAPISpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPISpace.h; sourceTree = "<group>"; };
+		E1A21849177F831500D0C720 /* SAPISpace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAPISpace.m; sourceTree = "<group>"; };
 		E1B3B097177D9A2E00209F6D /* SpaceAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1B3B09A177D9A2E00209F6D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		E1B3B09D177D9A2E00209F6D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -29,6 +41,11 @@
 		E1B3B0AC177D9A2E00209F6D /* SAPIAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SAPIAppDelegate.h; sourceTree = "<group>"; };
 		E1B3B0AD177D9A2E00209F6D /* SAPIAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SAPIAppDelegate.m; sourceTree = "<group>"; };
 		E1B3B0B0177D9A2E00209F6D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		E1B3B0B7177D9BC400209F6D /* SAPIAppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPIAppController.h; sourceTree = "<group>"; };
+		E1B3B0B8177D9BC400209F6D /* SAPIAppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAPIAppController.m; sourceTree = "<group>"; };
+		E1B3B0BD177D9C4B00209F6D /* SAPIPreferenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPIPreferenceController.h; sourceTree = "<group>"; };
+		E1B3B0BE177D9C4B00209F6D /* SAPIPreferenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAPIPreferenceController.m; sourceTree = "<group>"; };
+		E1B3B0C0177DE31F00209F6D /* Preferences.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Preferences.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +101,13 @@
 			children = (
 				E1B3B0AC177D9A2E00209F6D /* SAPIAppDelegate.h */,
 				E1B3B0AD177D9A2E00209F6D /* SAPIAppDelegate.m */,
+				E1B3B0B7177D9BC400209F6D /* SAPIAppController.h */,
+				E1B3B0B8177D9BC400209F6D /* SAPIAppController.m */,
+				E1A21848177F831500D0C720 /* SAPISpace.h */,
+				E1A21849177F831500D0C720 /* SAPISpace.m */,
+				E1B3B0BD177D9C4B00209F6D /* SAPIPreferenceController.h */,
+				E1B3B0BE177D9C4B00209F6D /* SAPIPreferenceController.m */,
+				E1B3B0C0177DE31F00209F6D /* Preferences.xib */,
 				E1B3B0AF177D9A2E00209F6D /* MainMenu.xib */,
 				E1B3B0A1177D9A2E00209F6D /* Supporting Files */,
 			);
@@ -93,6 +117,9 @@
 		E1B3B0A1177D9A2E00209F6D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E18F847B177F47FC006BB524 /* green.png */,
+				E18F847C177F47FC006BB524 /* red.png */,
+				E18F847D177F47FC006BB524 /* yellow.png */,
 				E1B3B0A2177D9A2E00209F6D /* SpaceAPI-Info.plist */,
 				E1B3B0A3177D9A2E00209F6D /* InfoPlist.strings */,
 				E1B3B0A6177D9A2E00209F6D /* main.m */,
@@ -157,6 +184,10 @@
 				E1B3B0A5177D9A2E00209F6D /* InfoPlist.strings in Resources */,
 				E1B3B0AB177D9A2E00209F6D /* Credits.rtf in Resources */,
 				E1B3B0B1177D9A2E00209F6D /* MainMenu.xib in Resources */,
+				E1B3B0C1177DE31F00209F6D /* Preferences.xib in Resources */,
+				E18F847E177F47FC006BB524 /* green.png in Resources */,
+				E18F847F177F47FC006BB524 /* red.png in Resources */,
+				E18F8480177F47FC006BB524 /* yellow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +200,9 @@
 			files = (
 				E1B3B0A7177D9A2E00209F6D /* main.m in Sources */,
 				E1B3B0AE177D9A2E00209F6D /* SAPIAppDelegate.m in Sources */,
+				E1B3B0B9177D9BC400209F6D /* SAPIAppController.m in Sources */,
+				E1B3B0BF177D9C4B00209F6D /* SAPIPreferenceController.m in Sources */,
+				E1A2184A177F831500D0C720 /* SAPISpace.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,6 +338,7 @@
 				E1B3B0B6177D9A2E00209F6D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

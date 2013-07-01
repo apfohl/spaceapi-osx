@@ -7,9 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "SAPIAppController.h"
 
 @interface SAPIAppDelegate : NSObject <NSApplicationDelegate>
 
-@property (assign) IBOutlet NSWindow *window;
+@property (weak) IBOutlet SAPIAppController *controller;
 
 @end

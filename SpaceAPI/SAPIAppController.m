@@ -25,6 +25,12 @@
     SAPISpace *_selectedSpace;
 }
 
++ (void)initialize {
+    NSMutableDictionary *defaultValues = [NSMutableDictionary dictionary];
+    [defaultValues setObject:[NSNumber numberWithLong:300] forKey:SAPIUpdateIntervalKey];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
+}
+
 - (id)init
 {
     self = [super init];
@@ -86,17 +92,25 @@
     [self.preferenceController showWindow:self];
 }
 
-- (IBAction)selectSpace:(NSMenuItem *)sender
+- (void)selectSpace:(NSString *)name
 {
-    SAPISpace *space = [[SAPISpace alloc] initWithName:sender.title andAPIURL:[_spacesDirectory objectForKey:sender.title]];
+    SAPISpace *space = [[SAPISpace alloc] initWithName:name andAPIURL:[_spacesDirectory objectForKey:name]];
     [space fetchSpaceData];
     _selectedSpace = space;
 
     self.selectedSpaceItem.title = [NSString stringWithFormat:@"Space: %@", space.name];
+
+    [SAPIPreferenceController setSelectedSpace:space.name];
+}
+
+- (IBAction)selectSpaceFromMenu:(NSMenuItem *)sender
+{
+    [self selectSpace:sender.title];
 }
 
 - (IBAction)clickUpdateStatus:(NSMenuItem *)sender
 {
+    self.statusItem.image = self.yellowLight;
     [_selectedSpace fetchSpaceData];
 }
 
@@ -113,12 +127,19 @@
         if (data && !error) {
             _spacesDirectory = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
 
+            NSString *spaceName = [SAPIPreferenceController selectedSpace];
+            if (spaceName) {
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^(void) {
+                    [self selectSpace:spaceName];
+                }];
+            }
+
             [[NSOperationQueue mainQueue] addOperationWithBlock:^(void) {
                 [self.spacesMenu removeItemAtIndex:0];
             }];
 
             for (NSString *name in [[_spacesDirectory allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)]) {
-                NSMenuItem *spaceItem = [[NSMenuItem alloc] initWithTitle:name action:@selector(selectSpace:) keyEquivalent:@""];
+                NSMenuItem *spaceItem = [[NSMenuItem alloc] initWithTitle:name action:@selector(selectSpaceFromMenu:) keyEquivalent:@""];
                 spaceItem.target = self;
 
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^(void) {

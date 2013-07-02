@@ -16,7 +16,7 @@
 @property (weak) IBOutlet NSMenuItem *selectedSpaceItem;
 
 - (IBAction)showPreferencePanel:(NSMenuItem *)sender;
-- (IBAction)selectSpace:(NSMenuItem *)sender;
+- (IBAction)selectSpaceFromMenu:(NSMenuItem *)sender;
 
 - (void)fetchSpaceDirectory;
 

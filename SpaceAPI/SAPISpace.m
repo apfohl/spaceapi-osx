@@ -7,6 +7,7 @@
 //
 
 #import "SAPISpace.h"
+#import "SAPIPreferenceController.h"
 
 NSString * const SAPIOpenStatusChangedNotification = @"SAPIOpenStatusChanged";
 
@@ -25,15 +26,16 @@ NSString * const SAPIOpenStatusChangedNotification = @"SAPIOpenStatusChanged";
         self.apiURL = apiURL;
         [self setOpen:NO];
 
-        _fetchTimer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(fetchTimerDo:) userInfo:nil repeats:YES];
+        _fetchTimer = [NSTimer scheduledTimerWithTimeInterval:[SAPIPreferenceController updateInterval] target:self selector:@selector(fetchTimerDo:) userInfo:nil repeats:NO];
     }
 
     return self;
 }
 
-- (IBAction)fetchTimerDo:(NSTimer *)sender
+- (IBAction)fetchTimerDo:(NSTimer *)aTimer
 {
     [self fetchSpaceData];
+    _fetchTimer = [NSTimer scheduledTimerWithTimeInterval:[SAPIPreferenceController updateInterval] target:self selector:@selector(fetchTimerDo:) userInfo:nil repeats:NO];
 }
 
 - (void)fetchSpaceData

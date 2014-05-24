@@ -58,7 +58,7 @@
 - (NSImage *)yellowLight
 {
     if (!_yellowLight) {
-        _yellowLight = [NSImage imageNamed:@"yellow"];
+        _yellowLight = [NSImage imageNamed:@"unknown"];
     }
     return _yellowLight;
 }
@@ -66,7 +66,7 @@
 - (NSImage *)redLight
 {
     if (!_redLight) {
-        _redLight = [NSImage imageNamed:@"red"];
+        _redLight = [NSImage imageNamed:@"closed"];
     }
     return _redLight;
 }
@@ -74,7 +74,7 @@
 - (NSImage *)greenLight
 {
     if (!_greenLight) {
-        _greenLight = [NSImage imageNamed:@"green"];
+        _greenLight = [NSImage imageNamed:@"open"];
     }
     return _greenLight;
 }

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 47;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -123,8 +123,8 @@
 				E1B3B0A1177D9A2E00209F6D /* Supporting Files */,
 			);
 			name = "spaceapi-osx";
-			path = "/Users/andreas/Developer/apfohl/spaceapi-osx/spaceapi-osx";
-			sourceTree = "<absolute>";
+			path = "spaceapi-osx";
+			sourceTree = "<group>";
 		};
 		E1B3B0A1177D9A2E00209F6D /* Supporting Files */ = {
 			isa = PBXGroup;
@@ -184,7 +184,7 @@
 				};
 			};
 			buildConfigurationList = E1B3B092177D9A2E00209F6D /* Build configuration list for PBXProject "spaceapi-osx" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 6.3";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (

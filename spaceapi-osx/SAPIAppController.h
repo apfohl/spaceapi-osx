@@ -14,6 +14,7 @@
 @property (weak) IBOutlet NSMenu *mainMenu;
 @property (weak) IBOutlet NSMenu *spacesMenu;
 @property (weak) IBOutlet NSMenuItem *selectedSpaceItem;
+@property (weak) IBOutlet NSMenuItem *selectedSpaceMessage;
 
 - (IBAction)showPreferencePanel:(NSMenuItem *)sender;
 - (IBAction)selectSpaceFromMenu:(NSMenuItem *)sender;

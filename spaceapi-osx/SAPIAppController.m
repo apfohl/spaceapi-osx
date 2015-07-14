@@ -117,6 +117,10 @@
 - (void)handleOpenStatusChange:(NSNotification *)notification
 {
     self.statusItem.image = [[[notification userInfo] objectForKey:@"openStatus"] boolValue] ? self.greenLight : self.redLight;
+    NSString *statusMessage = [[notification userInfo] objectForKey:@"statusMessage"];
+    self.selectedSpaceMessage.title = statusMessage ?: @"Space: no message";
+    self.selectedSpaceMessage.hidden = statusMessage == nil;
+
 }
 
 - (void)fetchSpaceDirectory

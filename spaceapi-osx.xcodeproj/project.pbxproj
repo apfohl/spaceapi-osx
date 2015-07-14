@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E198BCD01B55749D0061045C /* closed_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = E198BCCA1B55749D0061045C /* closed_dark.png */; };
+		E198BCD11B55749D0061045C /* open_dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E198BCCB1B55749D0061045C /* open_dark@2x.png */; };
+		E198BCD21B55749D0061045C /* open_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = E198BCCC1B55749D0061045C /* open_dark.png */; };
+		E198BCD31B55749D0061045C /* closed_dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E198BCCD1B55749D0061045C /* closed_dark@2x.png */; };
+		E198BCD41B55749D0061045C /* unknown_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = E198BCCE1B55749D0061045C /* unknown_dark.png */; };
+		E198BCD51B55749D0061045C /* unknown_dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E198BCCF1B55749D0061045C /* unknown_dark@2x.png */; };
 		E1A2184A177F831500D0C720 /* SAPISpace.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A21849177F831500D0C720 /* SAPISpace.m */; };
 		E1B3B09B177D9A2E00209F6D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1B3B09A177D9A2E00209F6D /* Cocoa.framework */; };
 		E1B3B0A5177D9A2E00209F6D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1B3B0A3177D9A2E00209F6D /* InfoPlist.strings */; };
@@ -27,6 +33,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E198BCCA1B55749D0061045C /* closed_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closed_dark.png; sourceTree = "<group>"; };
+		E198BCCB1B55749D0061045C /* open_dark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "open_dark@2x.png"; sourceTree = "<group>"; };
+		E198BCCC1B55749D0061045C /* open_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = open_dark.png; sourceTree = "<group>"; };
+		E198BCCD1B55749D0061045C /* closed_dark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "closed_dark@2x.png"; sourceTree = "<group>"; };
+		E198BCCE1B55749D0061045C /* unknown_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unknown_dark.png; sourceTree = "<group>"; };
+		E198BCCF1B55749D0061045C /* unknown_dark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unknown_dark@2x.png"; sourceTree = "<group>"; };
 		E1A21848177F831500D0C720 /* SAPISpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPISpace.h; sourceTree = "<group>"; };
 		E1A21849177F831500D0C720 /* SAPISpace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAPISpace.m; sourceTree = "<group>"; };
 		E1B3B097177D9A2E00209F6D /* spaceapi-osx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "spaceapi-osx.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,13 +134,18 @@
 				E1B3B0AF177D9A2E00209F6D /* MainMenu.xib */,
 				E1B3B0A1177D9A2E00209F6D /* Supporting Files */,
 			);
-			name = "spaceapi-osx";
 			path = "spaceapi-osx";
 			sourceTree = "<group>";
 		};
 		E1B3B0A1177D9A2E00209F6D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E198BCCA1B55749D0061045C /* closed_dark.png */,
+				E198BCCB1B55749D0061045C /* open_dark@2x.png */,
+				E198BCCC1B55749D0061045C /* open_dark.png */,
+				E198BCCD1B55749D0061045C /* closed_dark@2x.png */,
+				E198BCCE1B55749D0061045C /* unknown_dark.png */,
+				E198BCCF1B55749D0061045C /* unknown_dark@2x.png */,
 				E1FC9E0419312BE600F5818D /* unknown.png */,
 				E1FC9E0519312BE600F5818D /* unknown@2x.png */,
 				E1FC9E0019312AAB00F5818D /* closed.png */,
@@ -207,15 +224,21 @@
 			files = (
 				E1B3B0A5177D9A2E00209F6D /* InfoPlist.strings in Resources */,
 				E1FC9E0219312AAB00F5818D /* closed.png in Resources */,
+				E198BCD51B55749D0061045C /* unknown_dark@2x.png in Resources */,
 				E1FC9DFE1931284200F5818D /* open.png in Resources */,
 				E1FC9E0719312BE600F5818D /* unknown@2x.png in Resources */,
+				E198BCD41B55749D0061045C /* unknown_dark.png in Resources */,
 				E1FC9DFF1931284200F5818D /* open@2x.png in Resources */,
 				E1FC9E0319312AAB00F5818D /* closed@2x.png in Resources */,
 				E1B3B0AB177D9A2E00209F6D /* Credits.rtf in Resources */,
 				E1E6E6721931354700521581 /* spaceapi-osx.iconset in Resources */,
 				E1FC9E0619312BE600F5818D /* unknown.png in Resources */,
+				E198BCD01B55749D0061045C /* closed_dark.png in Resources */,
 				E1B3B0B1177D9A2E00209F6D /* MainMenu.xib in Resources */,
 				E1B3B0C1177DE31F00209F6D /* Preferences.xib in Resources */,
+				E198BCD11B55749D0061045C /* open_dark@2x.png in Resources */,
+				E198BCD21B55749D0061045C /* open_dark.png in Resources */,
+				E198BCD31B55749D0061045C /* closed_dark@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -23,6 +23,7 @@
     NSOperationQueue *_workerQueue;
     NSDictionary *_spacesDirectory;
     SAPISpace *_selectedSpace;
+    BOOL inDarkMode;
 }
 
 + (void)initialize {
@@ -37,6 +38,7 @@
     if (self) {
         _workerQueue = [[NSOperationQueue alloc] init];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleOpenStatusChange:) name:SAPIOpenStatusChangedNotification object:nil];
+        
     }
 
     return self;
@@ -58,7 +60,11 @@
 - (NSImage *)yellowLight
 {
     if (!_yellowLight) {
-        _yellowLight = [NSImage imageNamed:@"unknown"];
+        if (inDarkMode) {
+            _yellowLight = [NSImage imageNamed:@"unknown_dark"];
+        } else {
+            _yellowLight = [NSImage imageNamed:@"unknown"];
+        }
     }
     return _yellowLight;
 }
@@ -66,7 +72,11 @@
 - (NSImage *)redLight
 {
     if (!_redLight) {
-        _redLight = [NSImage imageNamed:@"closed"];
+        if (inDarkMode) {
+            _redLight = [NSImage imageNamed:@"closed_dark"];
+        } else {
+            _redLight = [NSImage imageNamed:@"closed"];
+        }
     }
     return _redLight;
 }
@@ -74,7 +84,11 @@
 - (NSImage *)greenLight
 {
     if (!_greenLight) {
-        _greenLight = [NSImage imageNamed:@"open"];
+        if (inDarkMode) {
+            _greenLight = [NSImage imageNamed:@"open_dark"];
+        } else {
+            _greenLight = [NSImage imageNamed:@"open"];
+        }
     }
     return _greenLight;
 }
@@ -83,8 +97,10 @@
 {
     self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
     self.statusItem.image = self.yellowLight;
+    self.statusItem.alternateImage = self.yellowLight;
     self.statusItem.menu = self.mainMenu;
     self.statusItem.highlightMode = YES;
+    inDarkMode = [[[NSAppearance currentAppearance] name] containsString:NSAppearanceNameVibrantDark];
 }
 
 - (IBAction)showPreferencePanel:(id)sender
@@ -111,12 +127,14 @@
 - (IBAction)clickUpdateStatus:(NSMenuItem *)sender
 {
     self.statusItem.image = self.yellowLight;
+    self.statusItem.alternateImage = self.yellowLight;
     [_selectedSpace fetchSpaceData];
 }
 
 - (void)handleOpenStatusChange:(NSNotification *)notification
 {
     self.statusItem.image = [[[notification userInfo] objectForKey:@"openStatus"] boolValue] ? self.greenLight : self.redLight;
+    self.statusItem.alternateImage = [[[notification userInfo] objectForKey:@"openStatus"] boolValue] ? self.greenLight : self.redLight;
     NSString *statusMessage = [[notification userInfo] objectForKey:@"statusMessage"];
     self.selectedSpaceMessage.title = statusMessage ?: @"Space: no message";
     self.selectedSpaceMessage.hidden = statusMessage == nil;

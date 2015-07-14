@@ -49,16 +49,23 @@ NSString * const SAPIOpenStatusChangedNotification = @"SAPIOpenStatusChanged";
 
             if (!jsonError) {
                 NSNumber *openStatus;
+                NSString *statusMessage;
                 NSString *version = [_spaceData objectForKey:@"api"];
 
                 if (version) {
                     if ([version isEqualToString:@"0.11"] || [version isEqualToString:@"0.12"]) {
                         openStatus = [_spaceData objectForKey:@"open"];
+                        statusMessage = [_spaceData objectForKey:@"status"];
                     } else {
                         openStatus = [[_spaceData objectForKey:@"state"] objectForKey:@"open"];
+                        statusMessage = [[_spaceData objectForKey:@"state"] objectForKey:@"message"];
                     }
 
-                    [[NSNotificationCenter defaultCenter] postNotificationName:SAPIOpenStatusChangedNotification object:self userInfo:[NSDictionary dictionaryWithObject:openStatus forKey:@"openStatus"]];
+                    NSDictionary *userInfo = [NSMutableDictionary dictionaryWithObject:openStatus forKey:@"openStatus"];
+                    if (statusMessage) {
+                        [userInfo setValue:statusMessage forKey:@"statusMessage"];
+                    }
+                    [[NSNotificationCenter defaultCenter] postNotificationName:SAPIOpenStatusChangedNotification object:self userInfo:userInfo];
 
                     [self setOpen:[openStatus boolValue]];
                 }

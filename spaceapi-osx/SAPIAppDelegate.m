@@ -10,8 +10,7 @@
 
 @implementation SAPIAppDelegate
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
   [self.controller fetchSpaceDirectory];
 }
 

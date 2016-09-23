@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 extern NSString * const SAPIOpenStatusChangedNotification;
+extern NSString * const SAPIStatusUpdateFailedNotification;
+extern NSString * const SAPIHasInvalidJsonNotification;
 
 @interface SAPISpace : NSObject
 
@@ -16,7 +18,8 @@ extern NSString * const SAPIOpenStatusChangedNotification;
 @property (strong) NSString *apiURL;
 @property (nonatomic, assign, getter = isOpen) BOOL open;
 
-- (id)initWithName:(NSString *)name andAPIURL:(NSString *)apiURL;
-- (void)fetchSpaceData;
+- (id) initWithName:(NSString *)name andAPIURL:(NSString *)apiURL;
+- (void) fetchSpaceStatus;
+- (void) timerCancel;
 
 @end

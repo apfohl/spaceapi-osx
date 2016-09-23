@@ -21,6 +21,6 @@ extern NSString * const SAPISelectedSpaceKey;
 + (NSString *)selectedSpace;
 + (void)setSelectedSpace:(NSString *)spaceName;
 
-- (IBAction)changeUpdateInterval:(NSTextField *)sender;
+- (IBAction)actionChangeUpdateInterval:(NSTextField *)sender;
 
 @end

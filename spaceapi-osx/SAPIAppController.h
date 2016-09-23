@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Quartz/Quartz.h>
+#import "SAPISpace.h"
 
 @interface SAPIAppController : NSObject
 
@@ -16,9 +18,15 @@
 @property (weak) IBOutlet NSMenuItem *selectedSpaceItem;
 @property (weak) IBOutlet NSMenuItem *selectedSpaceMessage;
 
-- (IBAction)showPreferencePanel:(NSMenuItem *)sender;
-- (IBAction)selectSpaceFromMenu:(NSMenuItem *)sender;
++ (NSDictionary *) dictionaryByReplacingNullsWithStringsInDictionary:(NSDictionary*)dictToClean;
 
-- (void)fetchSpaceDirectory;
+- (IBAction) actionShowPreferencePanel:(NSMenuItem *)sender;
+- (IBAction) actionSelectSpaceFromMenu:(NSMenuItem *)sender;
+- (IBAction) actionUpdateStatus:(NSMenuItem *)sender;
+
+- (void) startPulseAnimationOnView:(NSView*)view;
+- (void) stopPulseAnimationOnView:(NSView*)view;
+
+- (void) fetchSpaceDirectory;
 
 @end

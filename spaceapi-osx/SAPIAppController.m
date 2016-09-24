@@ -14,9 +14,9 @@
 
 @property (nonatomic, strong) SAPIPreferenceController *preferenceController;
 @property (nonatomic, strong) NSImage *imageBug;
-@property (nonatomic, strong) NSImage *yellowLight;
-@property (nonatomic, strong) NSImage *redLight;
-@property (nonatomic, strong) NSImage *greenLight;
+@property (nonatomic, strong) NSImage *imageUnknown;
+@property (nonatomic, strong) NSImage *imageClosed;
+@property (nonatomic, strong) NSImage *imageOpened;
 
 @end
 
@@ -55,8 +55,8 @@
 - (void) awakeFromNib { // NSStatusBarButton
     self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
     self.statusItem.button.wantsLayer = YES;
-    self.statusItem.image = self.yellowLight;
-    self.statusItem.alternateImage = self.yellowLight;
+    self.statusItem.image = self.imageUnknown;
+    self.statusItem.alternateImage = self.imageUnknown;
     self.statusItem.menu = self.mainMenu;
     self.statusItem.highlightMode = YES;
     inDarkMode = [[[NSAppearance currentAppearance] name] containsString:NSAppearanceNameVibrantDark];
@@ -110,48 +110,30 @@
 
 - (NSImage*) imageBug {
     if( !_imageBug ) {
-        if( inDarkMode ) {
-            _imageBug = [NSImage imageNamed:@"bug"];
-        }
-        else {
-            _imageBug = [NSImage imageNamed:@"bug"];
-        }
+        _imageBug = [NSImage imageNamed:inDarkMode ? @"bug" : @"bug"];
     }
     return _imageBug;
 }
 
-- (NSImage*) yellowLight {
-    if( !_yellowLight ) {
-        if( inDarkMode ) {
-            _yellowLight = [NSImage imageNamed:@"unknown_dark"];
-        }
-        else {
-            _yellowLight = [NSImage imageNamed:@"unknown"];
-        }
+- (NSImage*) imageUnknown {
+    if( !_imageUnknown ) {
+        _imageUnknown = [NSImage imageNamed:inDarkMode ? @"unknown_dark" : @"unknown"];
     }
-    return _yellowLight;
+    return _imageUnknown;
 }
 
-- (NSImage*) redLight {
-    if( !_redLight ) {
-        if( inDarkMode ) {
-            _redLight = [NSImage imageNamed:@"closed_dark"];
-        } else {
-            _redLight = [NSImage imageNamed:@"closed"];
-        }
+- (NSImage*) imageClosed {
+    if( !_imageClosed ) {
+        _imageClosed = [NSImage imageNamed:inDarkMode ? @"closed_dark" : @"closed"];
     }
-    return _redLight;
+    return _imageClosed;
 }
 
-- (NSImage*) greenLight {
-    if( !_greenLight ) {
-        if( inDarkMode ) {
-            _greenLight = [NSImage imageNamed:@"open_dark"];
-        } else {
-            _greenLight = [NSImage imageNamed:@"open"];
-        }
+- (NSImage*) imageOpened {
+    if( !_imageOpened ) {
+        _imageOpened = [NSImage imageNamed:inDarkMode ? @"open_dark" : @"open"];
     }
-    return _greenLight;
+    return _imageOpened;
 }
 
 - (void) selectSpace:(NSString *)name {
@@ -161,10 +143,17 @@
     SAPISpace *space = [[SAPISpace alloc] initWithName:name andAPIURL:[_spacesDirectory objectForKey:name]];
     [space fetchSpaceStatus];
     _selectedSpace = space;
-
     self.selectedSpaceItem.title = [NSString stringWithFormat:@"Space: %@", space.name];
-
     [SAPIPreferenceController setSelectedSpace:space.name];
+    NSArray *spaceEntries = self.spacesMenu.itemArray;
+    for( NSMenuItem *currentItem in spaceEntries ) {
+        if( [currentItem.title isEqualToString:_selectedSpace.name] ) {
+            [currentItem setState:1]; // ADDS CHECKMARK IN MENU
+        }
+        else {
+            [currentItem setState:0];
+        }
+    }
 }
 
 #pragma mark - notifications
@@ -192,8 +181,8 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self stopPulseAnimationOnView:self.statusItem.button];
         @try {
-                self.statusItem.image = [[[notification userInfo] objectForKey:@"openStatus"] boolValue] ? self.greenLight : self.redLight;
-                self.statusItem.alternateImage = [[[notification userInfo] objectForKey:@"openStatus"] boolValue] ? self.greenLight : self.redLight;
+                self.statusItem.image = [[[notification userInfo] objectForKey:@"openStatus"] boolValue] ? self.imageOpened : self.imageClosed;
+                self.statusItem.alternateImage = [[[notification userInfo] objectForKey:@"openStatus"] boolValue] ? self.imageOpened : self.imageClosed;
                 NSString *statusMessage = [[notification userInfo] objectForKey:@"statusMessage"];
                 self.selectedSpaceMessage.title = statusMessage ?: @"Space: no message";
                 self.statusItem.button.toolTip = self.selectedSpaceMessage.title;
@@ -222,23 +211,24 @@
                 @try {
                     // SANITIZE DATA...
                     _spacesDirectory = [SAPIAppController dictionaryByReplacingNullsWithStringsInDictionary:_spacesDirectory];
-                    NSString *spaceName = [SAPIPreferenceController selectedSpace];
-                    if( spaceName ) {
-                        [[NSOperationQueue mainQueue] addOperationWithBlock:^(void) {
-                            [self selectSpace:spaceName];
-                        }];
-                    }
-                    
                     [[NSOperationQueue mainQueue] addOperationWithBlock:^(void) {
                         [self.spacesMenu removeItemAtIndex:0];
                     }];
                     
+                    NSMenuItem *currentSpaceItem = nil;
                     for (NSString *name in [[_spacesDirectory allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)]) {
-                        NSMenuItem *spaceItem = [[NSMenuItem alloc] initWithTitle:name action:@selector(actionSelectSpaceFromMenu:) keyEquivalent:@""];
-                        spaceItem.target = self;
+                        currentSpaceItem = [[NSMenuItem alloc] initWithTitle:name action:@selector(actionSelectSpaceFromMenu:) keyEquivalent:@""];
+                        currentSpaceItem.target = self;
                         
                         [[NSOperationQueue mainQueue] addOperationWithBlock:^(void) {
-                            [self.spacesMenu addItem:spaceItem];
+                            [self.spacesMenu addItem:currentSpaceItem];
+                        }];
+                    }
+
+                    NSString *spaceName = [SAPIPreferenceController selectedSpace];
+                    if( spaceName ) {
+                        [[NSOperationQueue mainQueue] addOperationWithBlock:^(void) {
+                            [self selectSpace:spaceName];
                         }];
                     }
                 }
@@ -302,8 +292,8 @@
 }
 
 - (IBAction) actionSelectSpaceFromMenu:(NSMenuItem *)sender {
-    self.statusItem.image = self.yellowLight;
-    self.statusItem.alternateImage = self.yellowLight;
+    self.statusItem.image = self.imageUnknown;
+    self.statusItem.alternateImage = self.imageUnknown;
     self.statusItem.button.toolTip = @"Space: no message";
     self.selectedSpaceMessage.title = @"Space: no message";
     self.selectedSpaceMessage.hidden = YES;
@@ -312,8 +302,8 @@
 }
 
 - (IBAction) actionUpdateStatus:(NSMenuItem *)sender {
-    self.statusItem.image = self.yellowLight;
-    self.statusItem.alternateImage = self.yellowLight;
+    self.statusItem.image = self.imageUnknown;
+    self.statusItem.alternateImage = self.imageUnknown;
     [self startPulseAnimationOnView:self.statusItem.button];
     [_selectedSpace fetchSpaceStatus];
 }

@@ -60,6 +60,7 @@
     self.statusItem.menu = self.mainMenu;
     self.statusItem.highlightMode = YES;
     inDarkMode = [[[NSAppearance currentAppearance] name] containsString:NSAppearanceNameVibrantDark];
+    [self updateVersionMenu];
 }
 
 #pragma mark - convenience
@@ -134,6 +135,18 @@
         _imageOpened = [NSImage imageNamed:inDarkMode ? @"open_dark" : @"open"];
     }
     return _imageOpened;
+}
+
+- (void) updateVersionMenu {
+    NSString *appShortVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    NSString *appBuildNumber = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    NSString *appVersion = [NSString stringWithFormat:@"Version %@ (Build %@)", appShortVersion, appBuildNumber];
+    for( NSMenuItem *currentItem in self.mainMenu.itemArray ) {
+        if( [currentItem.title rangeOfString:@"Version"].location != NSNotFound ) {
+            [currentItem setTitle:appVersion];
+            [currentItem setEnabled:NO];
+        }
+    }
 }
 
 - (void) selectSpace:(NSString *)name {

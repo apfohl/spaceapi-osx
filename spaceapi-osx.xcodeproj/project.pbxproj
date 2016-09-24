@@ -52,7 +52,7 @@
 		E1B3B09D177D9A2E00209F6D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		E1B3B09E177D9A2E00209F6D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E1B3B09F177D9A2E00209F6D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		E1B3B0A2177D9A2E00209F6D /* spaceapi-osx-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "spaceapi-osx-Info.plist"; sourceTree = "<group>"; };
+		E1B3B0A2177D9A2E00209F6D /* spaceapi-osx-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "spaceapi-osx-Info.plist"; path = "spaceapi-osx/spaceapi-osx-Info.plist"; sourceTree = "<group>"; };
 		E1B3B0A4177D9A2E00209F6D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E1B3B0A6177D9A2E00209F6D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E1B3B0A8177D9A2E00209F6D /* spaceapi-osx-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "spaceapi-osx-Prefix.pch"; sourceTree = "<group>"; };
@@ -91,6 +91,7 @@
 		E1B3B08E177D9A2E00209F6D = {
 			isa = PBXGroup;
 			children = (
+				E1B3B0A2177D9A2E00209F6D /* spaceapi-osx-Info.plist */,
 				E1E6E6711931354700521581 /* spaceapi-osx.iconset */,
 				E1B3B0A0177D9A2E00209F6D /* spaceapi-osx */,
 				E1B3B099177D9A2E00209F6D /* Frameworks */,
@@ -162,7 +163,6 @@
 				E1FC9E0119312AAB00F5818D /* closed@2x.png */,
 				E1FC9DFC1931284200F5818D /* open.png */,
 				E1FC9DFD1931284200F5818D /* open@2x.png */,
-				E1B3B0A2177D9A2E00209F6D /* spaceapi-osx-Info.plist */,
 				E1B3B0A3177D9A2E00209F6D /* InfoPlist.strings */,
 				E1B3B0A6177D9A2E00209F6D /* main.m */,
 				E1B3B0A8177D9A2E00209F6D /* spaceapi-osx-Prefix.pch */,

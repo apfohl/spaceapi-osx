@@ -19,8 +19,7 @@
                 <menuItem title="Space: no message" id="7vg-aY-J2o">
                     <modifierMask key="keyEquivalentModifierMask"/>
                 </menuItem>
-                <menuItem title="Update Status…" id="538">
-                    <modifierMask key="keyEquivalentModifierMask"/>
+                <menuItem title="Update Status…" keyEquivalent="r" id="538">
                     <connections>
                         <action selector="actionUpdateStatus:" target="544" id="xLa-hp-aP8"/>
                     </connections>
@@ -36,14 +35,18 @@
                     </menu>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="540"/>
-                <menuItem title="Preferences" id="541">
+                <menuItem title="Version" id="NPI-hU-FUu">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="actionShowPreferencePanel:" target="544" id="dP1-ri-kam"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Preferences" keyEquivalent="," id="541">
                     <connections>
                         <action selector="actionShowPreferencePanel:" target="544" id="Qlt-7T-B4f"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Quit" id="542">
-                    <modifierMask key="keyEquivalentModifierMask"/>
+                <menuItem title="Quit" keyEquivalent="q" id="542">
                     <connections>
                         <action selector="terminate:" target="-3" id="543"/>
                     </connections>

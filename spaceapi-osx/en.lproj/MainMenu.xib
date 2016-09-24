@@ -25,11 +25,11 @@
                         <action selector="actionUpdateStatus:" target="544" id="xLa-hp-aP8"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Spaces" id="553">
+                <menuItem title="Hackerspaces" id="553">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="Spaces" id="554">
+                    <menu key="submenu" title="Hackerspaces" id="554">
                         <items>
-                            <menuItem title="no spaces available" id="555">
+                            <menuItem title="No spaces available." id="555">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                         </items>

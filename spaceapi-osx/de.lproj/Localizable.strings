@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  spaceapi-osx
+
+  Created by Lincoln Six Echo on 24.09.16.
+  Copyright © 2016 Andreas Pfohl. All rights reserved.
+  GERMAN
+*/
+
+/* SAPIAppController */
+
+"Space: no message" = "Space: Keine Statusmeldung";
+"Space: %@" = "Space: %@";

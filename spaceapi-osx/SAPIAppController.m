@@ -137,16 +137,26 @@
     return _imageOpened;
 }
 
+- (void) updateMenuItemEnabled:(BOOL)enabled containingString:(NSString*)stringSearch withString:(NSString*)stringTitle {
+    for( NSMenuItem *currentItem in self.mainMenu.itemArray ) {
+        if( [currentItem.title rangeOfString:stringSearch].location != NSNotFound ) {
+            [currentItem setTitle:stringTitle];
+            [currentItem setEnabled:enabled];
+        }
+    }
+}
+
 - (void) updateVersionMenu {
     NSString *appShortVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     NSString *appBuildNumber = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     NSString *appVersion = [NSString stringWithFormat:@"Version %@ (Build %@)", appShortVersion, appBuildNumber];
-    for( NSMenuItem *currentItem in self.mainMenu.itemArray ) {
-        if( [currentItem.title rangeOfString:@"Version"].location != NSNotFound ) {
-            [currentItem setTitle:appVersion];
-            [currentItem setEnabled:NO];
-        }
-    }
+    [self updateMenuItemEnabled:NO containingString:@"Version" withString:appVersion];
+}
+
+- (void) updateHackerspaceMenu {
+    NSUInteger amountOfSpaces = [self.spacesMenu.itemArray count];
+    NSString *spacesTitle = [NSString stringWithFormat:@"Hackerspaces (%lu)", amountOfSpaces];
+    [self updateMenuItemEnabled:YES containingString:@"Hackerspaces" withString:spacesTitle];
 }
 
 - (void) selectSpace:(NSString *)name {
@@ -156,7 +166,7 @@
     SAPISpace *space = [[SAPISpace alloc] initWithName:name andAPIURL:[_spacesDirectory objectForKey:name]];
     [space fetchSpaceStatus];
     _selectedSpace = space;
-    self.selectedSpaceItem.title = [NSString stringWithFormat:@"Space: %@", space.name];
+    self.selectedSpaceItem.title = [NSString stringWithFormat:LOC( @"Space: %@" ), space.name];
     [SAPIPreferenceController setSelectedSpace:space.name];
     NSArray *spaceEntries = self.spacesMenu.itemArray;
     for( NSMenuItem *currentItem in spaceEntries ) {
@@ -167,6 +177,7 @@
             [currentItem setState:0];
         }
     }
+    [self updateHackerspaceMenu];
 }
 
 #pragma mark - notifications
@@ -197,7 +208,7 @@
                 self.statusItem.image = [[[notification userInfo] objectForKey:@"openStatus"] boolValue] ? self.imageOpened : self.imageClosed;
                 self.statusItem.alternateImage = [[[notification userInfo] objectForKey:@"openStatus"] boolValue] ? self.imageOpened : self.imageClosed;
                 NSString *statusMessage = [[notification userInfo] objectForKey:@"statusMessage"];
-                self.selectedSpaceMessage.title = statusMessage ?: @"Space: no message";
+                self.selectedSpaceMessage.title = statusMessage ?: LOC( @"Space: no message" );
                 self.statusItem.button.toolTip = self.selectedSpaceMessage.title;
                 self.selectedSpaceMessage.hidden = ( statusMessage == nil );
         }
@@ -307,8 +318,8 @@
 - (IBAction) actionSelectSpaceFromMenu:(NSMenuItem *)sender {
     self.statusItem.image = self.imageUnknown;
     self.statusItem.alternateImage = self.imageUnknown;
-    self.statusItem.button.toolTip = @"Space: no message";
-    self.selectedSpaceMessage.title = @"Space: no message";
+    self.statusItem.button.toolTip = LOC( @"Space: no message" );
+    self.selectedSpaceMessage.title = LOC( @"Space: no message" );
     self.selectedSpaceMessage.hidden = YES;
     [self startPulseAnimationOnView:self.statusItem.button];
     [self selectSpace:sender.title];

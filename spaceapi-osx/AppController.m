@@ -240,6 +240,7 @@
         LOG( @"\n*** FATAL-API-FAIL ***\n\n  API: %@\n  URL: %@\nERROR: %@\n JSON: %@\n", [userInfo objectForKey:@"apicall"],[userInfo objectForKey:@"url"], [userInfo objectForKey:@"error"], [userInfo objectForKey:@"json"]);
         if( self.latestStatus != SpaceStatusJsonBug ) {
             self.latestStatus = SpaceStatusJsonBug;
+            self.latestSpaceStatusMessage = self.selectedSpaceMessage.title;
             [self notifyUserStatusChangedWithMessage:self.selectedSpaceMessage.title];
         }
     });
@@ -250,6 +251,7 @@
         [self stopPulseAnimationOnView:self.statusItem.button];
         if( self.latestStatus != SpaceStatusUnknown ) {
             self.latestStatus = SpaceStatusUnknown;
+            self.latestSpaceStatusMessage = nil;
         }
     });
 }
@@ -262,7 +264,15 @@
             BOOL isStatusOpen = [[[notification userInfo] objectForKey:@"openStatus"] boolValue];
             SpaceStatus statusUpdated = isStatusOpen ? SpaceStatusOpen : SpaceStatusClosed;
             if( self.latestStatus != statusUpdated && ( (self.latestStatus == SpaceStatusOpen) | (self.latestStatus == SpaceStatusClosed) ) ) {
+                self.latestSpaceStatusMessage = statusMessage;
                 if( !DEBUG_FORCE_NOTIFICATION ) {
+                    [self notifyUserStatusChangedWithMessage:statusMessage];
+                }
+            }
+            else {
+                // NOTIFY USER WHEN STATUS MESSAGE CHANGES (EVEN IF STATUS ITSELF STAYS THE SAME)
+                if( ![statusMessage isEqualToString:self.latestSpaceStatusMessage] ) {
+                    self.latestSpaceStatusMessage = statusMessage;
                     [self notifyUserStatusChangedWithMessage:statusMessage];
                 }
             }
@@ -282,6 +292,7 @@
             self.statusItem.image = [self imageForStatus:SpaceStatusJsonBug];
             self.statusItem.alternateImage = [self imageForStatus:SpaceStatusJsonBug];
             self.selectedSpaceMessage.title = [NSString stringWithFormat:@"BUG IN JSON:\n%@\nEXCEPTION:%@\n", [notification userInfo], exception];
+            self.latestSpaceStatusMessage = self.selectedSpaceMessage.title;
             self.statusItem.button.toolTip = self.selectedSpaceMessage.title;
             self.selectedSpaceMessage.hidden = NO;
         }
@@ -382,6 +393,7 @@
 
 - (IBAction) actionSelectSpaceFromMenu:(NSMenuItem *)sender {
     self.latestStatus = SpaceStatusZero;
+    self.latestSpaceStatusMessage = nil;
     self.statusItem.image = [self imageForStatus:SpaceStatusUnknown];
     self.statusItem.alternateImage = [self imageForStatus:SpaceStatusUnknown];
     self.statusItem.button.toolTip = LOC( @"Space: no message" );
@@ -393,6 +405,7 @@
 
 - (IBAction) actionUpdateStatus:(id)sender {
     self.latestStatus = SpaceStatusZero;
+    self.latestSpaceStatusMessage = nil;
     self.statusItem.image = [self imageForStatus:SpaceStatusUnknown];
     self.statusItem.alternateImage = [self imageForStatus:SpaceStatusUnknown];
     [self startPulseAnimationOnView:self.statusItem.button];

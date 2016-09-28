@@ -9,9 +9,10 @@ The program fetches a list of hackerspaces supporting the [Space API](http://spa
 
 Following features are provided by this application:
 
-* Fetch list of all hackerspaces (which support the spaceAPI)
-* Select your favourite hackerspace from a list
-* Update status automaticlly every n seconds (choose your own)
+* Supports English & German as languages
+* Fetches list of all hackerspaces (which support the spaceAPI)
+* Select your favourite hackerspace from the list of available ones
+* Update status automatically every **n** seconds
 * Get visual notice if the space is open/closed in menurbar icon
 * Get audio-visual notice as a notification when the status changes
 * Adjust the prefs to how often you want to poll status in seconds

@@ -26,6 +26,7 @@ typedef enum {
 @property (weak) IBOutlet NSMenuItem *selectedSpaceItem;
 @property (weak) IBOutlet NSMenuItem *selectedSpaceMessage;
 @property (assign) SpaceStatus latestStatus;
+@property (strong) NSString *latestSpaceStatusMessage;
 
 + (NSDictionary *) dictionaryByReplacingNullsWithStringsInDictionary:(NSDictionary*)dictToClean;
 

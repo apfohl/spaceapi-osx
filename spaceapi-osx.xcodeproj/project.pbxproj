@@ -21,6 +21,7 @@
 		8F77498E1D97DEDF00ABDF15 /* SAPIRadioShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F77498D1D97DEDF00ABDF15 /* SAPIRadioShow.m */; };
 		8F7749931D97E24300ABDF15 /* SAPIGenericApiObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7749921D97E24300ABDF15 /* SAPIGenericApiObject.m */; };
 		8F7749961D97ED5700ABDF15 /* SAPIIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7749951D97ED5700ABDF15 /* SAPIIcon.m */; };
+		8F7749C91D9C0B3900ABDF15 /* alarm.caf in Resources */ = {isa = PBXBuildFile; fileRef = 8F7749C71D9C0B2C00ABDF15 /* alarm.caf */; };
 		8FB641551D948BDB008A59E4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FB641541D948BDB008A59E4 /* QuartzCore.framework */; };
 		8FB641581D949F6B008A59E4 /* bug.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FB641561D949F6B008A59E4 /* bug.png */; };
 		8FB641591D949F6B008A59E4 /* bug@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FB641571D949F6B008A59E4 /* bug@2x.png */; };
@@ -80,6 +81,7 @@
 		8F7749921D97E24300ABDF15 /* SAPIGenericApiObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAPIGenericApiObject.m; sourceTree = "<group>"; };
 		8F7749941D97ED5700ABDF15 /* SAPIIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPIIcon.h; sourceTree = "<group>"; };
 		8F7749951D97ED5700ABDF15 /* SAPIIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAPIIcon.m; sourceTree = "<group>"; };
+		8F7749C71D9C0B2C00ABDF15 /* alarm.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = alarm.caf; sourceTree = "<group>"; };
 		8FB641541D948BDB008A59E4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8FB641561D949F6B008A59E4 /* bug.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bug.png; sourceTree = "<group>"; };
 		8FB641571D949F6B008A59E4 /* bug@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bug@2x.png"; sourceTree = "<group>"; };
@@ -185,6 +187,14 @@
 			name = images;
 			sourceTree = "<group>";
 		};
+		8F7749C81D9C0B3200ABDF15 /* sounds */ = {
+			isa = PBXGroup;
+			children = (
+				8F7749C71D9C0B2C00ABDF15 /* alarm.caf */,
+			);
+			name = sounds;
+			sourceTree = "<group>";
+		};
 		E1B3B08E177D9A2E00209F6D = {
 			isa = PBXGroup;
 			children = (
@@ -250,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				E1E6E6711931354700521581 /* spaceapi-osx.iconset */,
+				8F7749C81D9C0B3200ABDF15 /* sounds */,
 				8F59EED11D96D89900DC8EF7 /* images */,
 			);
 			name = "Supporting Files";
@@ -334,6 +345,7 @@
 				E198BCD01B55749D0061045C /* closed_dark.png in Resources */,
 				E1B3B0B1177D9A2E00209F6D /* MainMenu.xib in Resources */,
 				8F59EED21D96D8AF00DC8EF7 /* Preferences.xib in Resources */,
+				8F7749C91D9C0B3900ABDF15 /* alarm.caf in Resources */,
 				E198BCD11B55749D0061045C /* open_dark@2x.png in Resources */,
 				E198BCD21B55749D0061045C /* open_dark.png in Resources */,
 				E198BCD31B55749D0061045C /* closed_dark@2x.png in Resources */,

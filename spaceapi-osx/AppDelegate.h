@@ -9,8 +9,10 @@
 #import <Cocoa/Cocoa.h>
 #import "AppController.h"
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate,NSUserNotificationCenterDelegate>
 
 @property (weak) IBOutlet AppController *controller;
+
+- (void) deliverNotificationWithTitle:(NSString*)title subtitle:(NSString*)subtitle message:(NSString*)message andImage:(NSImage*)image;
 
 @end

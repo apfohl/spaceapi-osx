@@ -11,10 +11,11 @@
 #import "SAPISpace.h"
 
 typedef enum {
-    SpaceStatusUnknown,
-    SpaceStatusJsonBug,
-    SpaceStatusOpen,
-    SpaceStatusClosed
+    SpaceStatusZero     = 0,
+    SpaceStatusUnknown  = 1,
+    SpaceStatusJsonBug  = 2,
+    SpaceStatusOpen     = 3,
+    SpaceStatusClosed   = 4,
 } SpaceStatus;
 
 @interface AppController : NSObject
@@ -24,6 +25,7 @@ typedef enum {
 @property (weak) IBOutlet NSMenu *spacesMenu;
 @property (weak) IBOutlet NSMenuItem *selectedSpaceItem;
 @property (weak) IBOutlet NSMenuItem *selectedSpaceMessage;
+@property (assign) SpaceStatus latestStatus;
 
 + (NSDictionary *) dictionaryByReplacingNullsWithStringsInDictionary:(NSDictionary*)dictToClean;
 

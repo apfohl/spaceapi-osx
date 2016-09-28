@@ -11,3 +11,7 @@
 
 "Space: no message" = "Space: Keine Statusmeldung";
 "Space: %@" = "Space: %@";
+"Status changed" = "Statusänderung";
+"Is now open." = "Ist jetzt geöffnet.";
+"Is now closed." = "Ist jetzt geschlossen.";
+"Error in spaceAPI." = "Fehler im spaceAPI.";

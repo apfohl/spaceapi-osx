@@ -11,7 +11,24 @@
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-  [self.controller fetchSpaceDirectory];
+    [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:self];
+    [self.controller fetchSpaceDirectory];
+}
+
+#pragma mark - notifications
+
+- (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center shouldPresentNotification:(NSUserNotification *)notification{
+    return YES;
+}
+
+- (void) deliverNotificationWithTitle:(NSString*)title subtitle:(NSString*)subtitle message:(NSString*)message andImage:(NSImage*)image {
+    NSUserNotification *notification = [[NSUserNotification alloc] init];
+    notification.title = title;
+    notification.subtitle = subtitle;
+    notification.informativeText = message;
+    notification.contentImage = image;
+    notification.soundName = NSUserNotificationDefaultSoundName;
+    [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
 }
 
 @end

@@ -9,6 +9,7 @@
 #import "AppController.h"
 #import "PreferenceController.h"
 #import "SAPISpace.h"
+#import "AppDelegate.h"
 
 @interface AppController ()
 
@@ -78,6 +79,7 @@
     self.statusItem.highlightMode = YES;
     inDarkMode = [[[NSAppearance currentAppearance] name] containsString:NSAppearanceNameVibrantDark];
     [self updateVersionMenu];
+    self.latestStatus = SpaceStatusZero;
 }
 
 #pragma mark - convenience
@@ -119,6 +121,10 @@
     return [NSDictionary dictionaryWithDictionary:replaced];
 }
 
+- (AppDelegate*)appDelegate {
+    return (AppDelegate*)[NSApplication sharedApplication].delegate;
+}
+
 - (PreferenceController *)preferenceController {
     if (!_preferenceController) {
         _preferenceController = [[PreferenceController alloc] init];
@@ -139,6 +145,9 @@
             break;
         case SpaceStatusClosed:
             return [NSImage imageNamed:inDarkMode ? @"closed_dark" : @"closed"];
+            break;
+        case SpaceStatusZero:
+            return [NSImage imageNamed:inDarkMode ? @"unknown_dark" : @"unknown"];
             break;
             
         default:
@@ -186,6 +195,37 @@
     [self updateHackerspaceMenu];
 }
 
+#pragma mark - get users attention
+
+- (void) playAudioAlert {
+    NSSound *sound = nil;
+    @try {
+        sound = [[NSSound alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"alarm" ofType:@"caf"] byReference:NO];
+        [sound play];
+    }
+    @catch (NSException *exception) {
+        // do nothing
+    }
+}
+
+- (void) notifyUserStatusChangedWithMessage:(NSString*)message {
+    NSString *statusAsText = nil;
+    if( self.latestStatus == SpaceStatusClosed ) {
+        statusAsText = LOC( @"Is now closed." );
+    }
+    else if( self.latestStatus == SpaceStatusOpen ) {
+        statusAsText = LOC( @"Is now open." );
+    }
+    else if( self.latestStatus == SpaceStatusJsonBug ) {
+        statusAsText = LOC( @"Error in spaceAPI." );
+    }
+    else {
+        return; // do nothing for other statuses
+    }
+    NSString *title = _selectedSpace ? _selectedSpace.name : LOC( @"Status changed" );
+    [[self appDelegate] deliverNotificationWithTitle:title subtitle:statusAsText message:message andImage:[self imageForStatus:_latestStatus]];
+}
+
 #pragma mark - notifications
 
 - (void) handleInvalidJsonError:(NSNotification *)notification {
@@ -198,12 +238,19 @@
         self.statusItem.button.toolTip = self.selectedSpaceMessage.title;
         self.selectedSpaceMessage.hidden = NO;
         LOG( @"\n*** FATAL-API-FAIL ***\n\n  API: %@\n  URL: %@\nERROR: %@\n JSON: %@\n", [userInfo objectForKey:@"apicall"],[userInfo objectForKey:@"url"], [userInfo objectForKey:@"error"], [userInfo objectForKey:@"json"]);
+        if( self.latestStatus != SpaceStatusJsonBug ) {
+            self.latestStatus = SpaceStatusJsonBug;
+            [self notifyUserStatusChangedWithMessage:self.selectedSpaceMessage.title];
+        }
     });
 }
 
 - (void) handleStatusUpdateFailed:(NSNotification *)notification {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self stopPulseAnimationOnView:self.statusItem.button];
+        if( self.latestStatus != SpaceStatusUnknown ) {
+            self.latestStatus = SpaceStatusUnknown;
+        }
     });
 }
 
@@ -211,16 +258,27 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self stopPulseAnimationOnView:self.statusItem.button];
         @try {
+            NSString *statusMessage = [[notification userInfo] objectForKey:@"statusMessage"];
             BOOL isStatusOpen = [[[notification userInfo] objectForKey:@"openStatus"] boolValue];
+            SpaceStatus statusUpdated = isStatusOpen ? SpaceStatusOpen : SpaceStatusClosed;
+            if( self.latestStatus != statusUpdated && ( (self.latestStatus == SpaceStatusOpen) | (self.latestStatus == SpaceStatusClosed) ) ) {
+                if( !DEBUG_FORCE_NOTIFICATION ) {
+                    [self notifyUserStatusChangedWithMessage:statusMessage];
+                }
+            }
+            self.latestStatus = isStatusOpen ? SpaceStatusOpen : SpaceStatusClosed;
             self.statusItem.image = [self imageForStatus:isStatusOpen ? SpaceStatusOpen : SpaceStatusClosed];
             self.statusItem.alternateImage = [self imageForStatus:isStatusOpen ? SpaceStatusOpen : SpaceStatusClosed];
-            NSString *statusMessage = [[notification userInfo] objectForKey:@"statusMessage"];
             self.selectedSpaceMessage.title = statusMessage ?: LOC( @"Space: no message" );
             self.statusItem.button.toolTip = self.selectedSpaceMessage.title;
             self.selectedSpaceMessage.hidden = ( statusMessage == nil );
+            if( DEBUG_FORCE_NOTIFICATION ) {
+                [self notifyUserStatusChangedWithMessage:statusMessage];
+            }
         }
         @catch (NSException *exception) {
             LOG( @"handleOpenStatusChange Error: %@\n\n---\n%@", [notification userInfo], exception );
+            self.latestStatus = SpaceStatusJsonBug;
             self.statusItem.image = [self imageForStatus:SpaceStatusJsonBug];
             self.statusItem.alternateImage = [self imageForStatus:SpaceStatusJsonBug];
             self.selectedSpaceMessage.title = [NSString stringWithFormat:@"BUG IN JSON:\n%@\nEXCEPTION:%@\n", [notification userInfo], exception];
@@ -323,6 +381,7 @@
 }
 
 - (IBAction) actionSelectSpaceFromMenu:(NSMenuItem *)sender {
+    self.latestStatus = SpaceStatusZero;
     self.statusItem.image = [self imageForStatus:SpaceStatusUnknown];
     self.statusItem.alternateImage = [self imageForStatus:SpaceStatusUnknown];
     self.statusItem.button.toolTip = LOC( @"Space: no message" );
@@ -333,6 +392,7 @@
 }
 
 - (IBAction) actionUpdateStatus:(id)sender {
+    self.latestStatus = SpaceStatusZero;
     self.statusItem.image = [self imageForStatus:SpaceStatusUnknown];
     self.statusItem.alternateImage = [self imageForStatus:SpaceStatusUnknown];
     [self startPulseAnimationOnView:self.statusItem.button];

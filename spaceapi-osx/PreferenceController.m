@@ -1,17 +1,17 @@
 //
-//  SAPIPreferenceController.m
+//  PreferenceController.m
 //  SpaceAPI
 //
 //  Created by Andreas Pfohl on 28.06.13.
 //  Copyright (c) 2013 Andreas Pfohl. All rights reserved.
 //
 
-#import "SAPIPreferenceController.h"
+#import "PreferenceController.h"
 
 NSString * const SAPIUpdateIntervalKey = @"SAPIUpdateInterval";
 NSString * const SAPISelectedSpaceKey = @"SAPIUpdateSelectedSpace";
 
-@implementation SAPIPreferenceController
+@implementation PreferenceController
 
 + (long) updateInterval {
     return [[NSUserDefaults standardUserDefaults] integerForKey:SAPIUpdateIntervalKey];
@@ -35,12 +35,12 @@ NSString * const SAPISelectedSpaceKey = @"SAPIUpdateSelectedSpace";
 }
 
 - (IBAction) actionChangeUpdateInterval:(NSTextField *)sender {
-    [SAPIPreferenceController setUpdateInterval:[self.intervalField integerValue]];
+    [PreferenceController setUpdateInterval:[self.intervalField integerValue]];
 }
 
 - (void) windowDidLoad {
     [super windowDidLoad];
-    [self.intervalField setStringValue:[NSString stringWithFormat:@"%li", [SAPIPreferenceController updateInterval]]];
+    [self.intervalField setStringValue:[NSString stringWithFormat:@"%li", [PreferenceController updateInterval]]];
 }
 
 @end

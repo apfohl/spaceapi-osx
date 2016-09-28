@@ -52,12 +52,12 @@
                 </menuItem>
             </items>
         </menu>
-        <customObject id="494" customClass="SAPIAppDelegate">
+        <customObject id="494" customClass="AppDelegate">
             <connections>
                 <outlet property="controller" destination="544" id="557"/>
             </connections>
         </customObject>
-        <customObject id="544" customClass="SAPIAppController">
+        <customObject id="544" customClass="AppController">
             <connections>
                 <outlet property="mainMenu" destination="536" id="552"/>
                 <outlet property="selectedSpaceItem" destination="537" id="560"/>

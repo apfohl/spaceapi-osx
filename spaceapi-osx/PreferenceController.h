@@ -1,5 +1,5 @@
 //
-//  SAPIPreferenceController.h
+//  PreferenceController.h
 //  SpaceAPI
 //
 //  Created by Andreas Pfohl on 28.06.13.
@@ -11,7 +11,7 @@
 extern NSString * const SAPIUpdateIntervalKey;
 extern NSString * const SAPISelectedSpaceKey;
 
-@interface SAPIPreferenceController : NSWindowController
+@interface PreferenceController : NSWindowController
 
 @property (weak) IBOutlet NSTextField *intervalField;
 

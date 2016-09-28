@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="SAPIPreferenceController">
+        <customObject id="-2" userLabel="File's Owner" customClass="PreferenceController">
             <connections>
                 <outlet property="intervalField" destination="16" id="28"/>
                 <outlet property="window" destination="1" id="3"/>

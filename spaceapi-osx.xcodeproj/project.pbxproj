@@ -9,6 +9,18 @@
 /* Begin PBXBuildFile section */
 		8F59EED21D96D8AF00DC8EF7 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F59EED41D96D8AF00DC8EF7 /* Preferences.xib */; };
 		8F59EEDA1D96DA0900DC8EF7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8F59EEDC1D96DA0900DC8EF7 /* Localizable.strings */; };
+		8F7749731D97D88300ABDF15 /* SAPILocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7749721D97D88300ABDF15 /* SAPILocation.m */; };
+		8F7749761D97D95400ABDF15 /* SAPISpaceFed.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7749751D97D95400ABDF15 /* SAPISpaceFed.m */; };
+		8F7749791D97DA3700ABDF15 /* SAPIStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7749781D97DA3700ABDF15 /* SAPIStream.m */; };
+		8F77497C1D97DA8000ABDF15 /* SAPIState.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F77497B1D97DA8000ABDF15 /* SAPIState.m */; };
+		8F77497F1D97DB0100ABDF15 /* SAPIEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F77497E1D97DB0100ABDF15 /* SAPIEvent.m */; };
+		8F7749821D97DB2600ABDF15 /* SAPIContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7749811D97DB2600ABDF15 /* SAPIContact.m */; };
+		8F7749851D97DD8E00ABDF15 /* SAPISensors.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7749841D97DD8E00ABDF15 /* SAPISensors.m */; };
+		8F7749881D97DDDF00ABDF15 /* SAPIFeeds.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7749871D97DDDF00ABDF15 /* SAPIFeeds.m */; };
+		8F77498B1D97DE6200ABDF15 /* SAPICache.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F77498A1D97DE6200ABDF15 /* SAPICache.m */; };
+		8F77498E1D97DEDF00ABDF15 /* SAPIRadioShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F77498D1D97DEDF00ABDF15 /* SAPIRadioShow.m */; };
+		8F7749931D97E24300ABDF15 /* SAPIGenericApiObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7749921D97E24300ABDF15 /* SAPIGenericApiObject.m */; };
+		8F7749961D97ED5700ABDF15 /* SAPIIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7749951D97ED5700ABDF15 /* SAPIIcon.m */; };
 		8FB641551D948BDB008A59E4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FB641541D948BDB008A59E4 /* QuartzCore.framework */; };
 		8FB641581D949F6B008A59E4 /* bug.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FB641561D949F6B008A59E4 /* bug.png */; };
 		8FB641591D949F6B008A59E4 /* bug@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FB641571D949F6B008A59E4 /* bug@2x.png */; };
@@ -23,10 +35,10 @@
 		E1B3B0A5177D9A2E00209F6D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1B3B0A3177D9A2E00209F6D /* InfoPlist.strings */; };
 		E1B3B0A7177D9A2E00209F6D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B3B0A6177D9A2E00209F6D /* main.m */; };
 		E1B3B0AB177D9A2E00209F6D /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = E1B3B0A9177D9A2E00209F6D /* Credits.rtf */; };
-		E1B3B0AE177D9A2E00209F6D /* SAPIAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B3B0AD177D9A2E00209F6D /* SAPIAppDelegate.m */; };
+		E1B3B0AE177D9A2E00209F6D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B3B0AD177D9A2E00209F6D /* AppDelegate.m */; };
 		E1B3B0B1177D9A2E00209F6D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1B3B0AF177D9A2E00209F6D /* MainMenu.xib */; };
-		E1B3B0B9177D9BC400209F6D /* SAPIAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B3B0B8177D9BC400209F6D /* SAPIAppController.m */; };
-		E1B3B0BF177D9C4B00209F6D /* SAPIPreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B3B0BE177D9C4B00209F6D /* SAPIPreferenceController.m */; };
+		E1B3B0B9177D9BC400209F6D /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B3B0B8177D9BC400209F6D /* AppController.m */; };
+		E1B3B0BF177D9C4B00209F6D /* PreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B3B0BE177D9C4B00209F6D /* PreferenceController.m */; };
 		E1E6E6721931354700521581 /* spaceapi-osx.iconset in Resources */ = {isa = PBXBuildFile; fileRef = E1E6E6711931354700521581 /* spaceapi-osx.iconset */; };
 		E1FC9DFE1931284200F5818D /* open.png in Resources */ = {isa = PBXBuildFile; fileRef = E1FC9DFC1931284200F5818D /* open.png */; };
 		E1FC9DFF1931284200F5818D /* open@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1FC9DFD1931284200F5818D /* open@2x.png */; };
@@ -44,6 +56,30 @@
 		8F59EED51D96D8B200DC8EF7 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/Preferences.xib; sourceTree = "<group>"; };
 		8F59EEDB1D96DA0900DC8EF7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8F59EEDD1D96DA0C00DC8EF7 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8F7749711D97D88300ABDF15 /* SAPILocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPILocation.h; sourceTree = "<group>"; };
+		8F7749721D97D88300ABDF15 /* SAPILocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAPILocation.m; sourceTree = "<group>"; };
+		8F7749741D97D95400ABDF15 /* SAPISpaceFed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPISpaceFed.h; sourceTree = "<group>"; };
+		8F7749751D97D95400ABDF15 /* SAPISpaceFed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAPISpaceFed.m; sourceTree = "<group>"; };
+		8F7749771D97DA3700ABDF15 /* SAPIStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPIStream.h; sourceTree = "<group>"; };
+		8F7749781D97DA3700ABDF15 /* SAPIStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAPIStream.m; sourceTree = "<group>"; };
+		8F77497A1D97DA8000ABDF15 /* SAPIState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPIState.h; sourceTree = "<group>"; };
+		8F77497B1D97DA8000ABDF15 /* SAPIState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAPIState.m; sourceTree = "<group>"; };
+		8F77497D1D97DB0100ABDF15 /* SAPIEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPIEvent.h; sourceTree = "<group>"; };
+		8F77497E1D97DB0100ABDF15 /* SAPIEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAPIEvent.m; sourceTree = "<group>"; };
+		8F7749801D97DB2600ABDF15 /* SAPIContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPIContact.h; sourceTree = "<group>"; };
+		8F7749811D97DB2600ABDF15 /* SAPIContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAPIContact.m; sourceTree = "<group>"; };
+		8F7749831D97DD8E00ABDF15 /* SAPISensors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPISensors.h; sourceTree = "<group>"; };
+		8F7749841D97DD8E00ABDF15 /* SAPISensors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAPISensors.m; sourceTree = "<group>"; };
+		8F7749861D97DDDF00ABDF15 /* SAPIFeeds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPIFeeds.h; sourceTree = "<group>"; };
+		8F7749871D97DDDF00ABDF15 /* SAPIFeeds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAPIFeeds.m; sourceTree = "<group>"; };
+		8F7749891D97DE6200ABDF15 /* SAPICache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPICache.h; sourceTree = "<group>"; };
+		8F77498A1D97DE6200ABDF15 /* SAPICache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAPICache.m; sourceTree = "<group>"; };
+		8F77498C1D97DEDF00ABDF15 /* SAPIRadioShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPIRadioShow.h; sourceTree = "<group>"; };
+		8F77498D1D97DEDF00ABDF15 /* SAPIRadioShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAPIRadioShow.m; sourceTree = "<group>"; };
+		8F7749911D97E24300ABDF15 /* SAPIGenericApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPIGenericApiObject.h; sourceTree = "<group>"; };
+		8F7749921D97E24300ABDF15 /* SAPIGenericApiObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAPIGenericApiObject.m; sourceTree = "<group>"; };
+		8F7749941D97ED5700ABDF15 /* SAPIIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPIIcon.h; sourceTree = "<group>"; };
+		8F7749951D97ED5700ABDF15 /* SAPIIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAPIIcon.m; sourceTree = "<group>"; };
 		8FB641541D948BDB008A59E4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8FB641561D949F6B008A59E4 /* bug.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bug.png; sourceTree = "<group>"; };
 		8FB641571D949F6B008A59E4 /* bug@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bug@2x.png"; sourceTree = "<group>"; };
@@ -65,13 +101,13 @@
 		E1B3B0A6177D9A2E00209F6D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "spaceapi-osx/main.m"; sourceTree = "<group>"; };
 		E1B3B0A8177D9A2E00209F6D /* spaceapi-osx-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "spaceapi-osx-Prefix.pch"; path = "spaceapi-osx/spaceapi-osx-Prefix.pch"; sourceTree = "<group>"; };
 		E1B3B0AA177D9A2E00209F6D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		E1B3B0AC177D9A2E00209F6D /* SAPIAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SAPIAppDelegate.h; sourceTree = "<group>"; };
-		E1B3B0AD177D9A2E00209F6D /* SAPIAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SAPIAppDelegate.m; sourceTree = "<group>"; };
+		E1B3B0AC177D9A2E00209F6D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		E1B3B0AD177D9A2E00209F6D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		E1B3B0B0177D9A2E00209F6D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		E1B3B0B7177D9BC400209F6D /* SAPIAppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPIAppController.h; sourceTree = "<group>"; };
-		E1B3B0B8177D9BC400209F6D /* SAPIAppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAPIAppController.m; sourceTree = "<group>"; };
-		E1B3B0BD177D9C4B00209F6D /* SAPIPreferenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPIPreferenceController.h; sourceTree = "<group>"; };
-		E1B3B0BE177D9C4B00209F6D /* SAPIPreferenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAPIPreferenceController.m; sourceTree = "<group>"; };
+		E1B3B0B7177D9BC400209F6D /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
+		E1B3B0B8177D9BC400209F6D /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
+		E1B3B0BD177D9C4B00209F6D /* PreferenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferenceController.h; sourceTree = "<group>"; };
+		E1B3B0BE177D9C4B00209F6D /* PreferenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferenceController.m; sourceTree = "<group>"; };
 		E1E6E6701931347200521581 /* spaceapi-osx.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "spaceapi-osx.entitlements"; sourceTree = "<group>"; };
 		E1E6E6711931354700521581 /* spaceapi-osx.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = "spaceapi-osx.iconset"; sourceTree = SOURCE_ROOT; };
 		E1FC9DFC1931284200F5818D /* open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = open.png; sourceTree = "<group>"; };
@@ -95,6 +131,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8F2133DC1D97D50A001943B6 /* API Classes */ = {
+			isa = PBXGroup;
+			children = (
+				8F7749911D97E24300ABDF15 /* SAPIGenericApiObject.h */,
+				8F7749921D97E24300ABDF15 /* SAPIGenericApiObject.m */,
+				E1A21848177F831500D0C720 /* SAPISpace.h */,
+				E1A21849177F831500D0C720 /* SAPISpace.m */,
+				8F7749711D97D88300ABDF15 /* SAPILocation.h */,
+				8F7749721D97D88300ABDF15 /* SAPILocation.m */,
+				8F7749741D97D95400ABDF15 /* SAPISpaceFed.h */,
+				8F7749751D97D95400ABDF15 /* SAPISpaceFed.m */,
+				8F7749771D97DA3700ABDF15 /* SAPIStream.h */,
+				8F7749781D97DA3700ABDF15 /* SAPIStream.m */,
+				8F77497A1D97DA8000ABDF15 /* SAPIState.h */,
+				8F77497B1D97DA8000ABDF15 /* SAPIState.m */,
+				8F7749941D97ED5700ABDF15 /* SAPIIcon.h */,
+				8F7749951D97ED5700ABDF15 /* SAPIIcon.m */,
+				8F77497D1D97DB0100ABDF15 /* SAPIEvent.h */,
+				8F77497E1D97DB0100ABDF15 /* SAPIEvent.m */,
+				8F7749801D97DB2600ABDF15 /* SAPIContact.h */,
+				8F7749811D97DB2600ABDF15 /* SAPIContact.m */,
+				8F7749831D97DD8E00ABDF15 /* SAPISensors.h */,
+				8F7749841D97DD8E00ABDF15 /* SAPISensors.m */,
+				8F7749861D97DDDF00ABDF15 /* SAPIFeeds.h */,
+				8F7749871D97DDDF00ABDF15 /* SAPIFeeds.m */,
+				8F7749891D97DE6200ABDF15 /* SAPICache.h */,
+				8F77498A1D97DE6200ABDF15 /* SAPICache.m */,
+				8F77498C1D97DEDF00ABDF15 /* SAPIRadioShow.h */,
+				8F77498D1D97DEDF00ABDF15 /* SAPIRadioShow.m */,
+			);
+			name = "API Classes";
+			sourceTree = "<group>";
+		};
 		8F59EED11D96D89900DC8EF7 /* images */ = {
 			isa = PBXGroup;
 			children = (
@@ -160,14 +229,13 @@
 			isa = PBXGroup;
 			children = (
 				E1E6E6701931347200521581 /* spaceapi-osx.entitlements */,
-				E1B3B0AC177D9A2E00209F6D /* SAPIAppDelegate.h */,
-				E1B3B0AD177D9A2E00209F6D /* SAPIAppDelegate.m */,
-				E1B3B0B7177D9BC400209F6D /* SAPIAppController.h */,
-				E1B3B0B8177D9BC400209F6D /* SAPIAppController.m */,
-				E1A21848177F831500D0C720 /* SAPISpace.h */,
-				E1A21849177F831500D0C720 /* SAPISpace.m */,
-				E1B3B0BD177D9C4B00209F6D /* SAPIPreferenceController.h */,
-				E1B3B0BE177D9C4B00209F6D /* SAPIPreferenceController.m */,
+				E1B3B0AC177D9A2E00209F6D /* AppDelegate.h */,
+				E1B3B0AD177D9A2E00209F6D /* AppDelegate.m */,
+				E1B3B0B7177D9BC400209F6D /* AppController.h */,
+				E1B3B0B8177D9BC400209F6D /* AppController.m */,
+				E1B3B0BD177D9C4B00209F6D /* PreferenceController.h */,
+				E1B3B0BE177D9C4B00209F6D /* PreferenceController.m */,
+				8F2133DC1D97D50A001943B6 /* API Classes */,
 				8F59EED41D96D8AF00DC8EF7 /* Preferences.xib */,
 				E1B3B0AF177D9A2E00209F6D /* MainMenu.xib */,
 				8F59EEDC1D96DA0900DC8EF7 /* Localizable.strings */,
@@ -279,11 +347,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F7749881D97DDDF00ABDF15 /* SAPIFeeds.m in Sources */,
+				8F77498B1D97DE6200ABDF15 /* SAPICache.m in Sources */,
+				8F7749791D97DA3700ABDF15 /* SAPIStream.m in Sources */,
+				8F77497C1D97DA8000ABDF15 /* SAPIState.m in Sources */,
+				8F77498E1D97DEDF00ABDF15 /* SAPIRadioShow.m in Sources */,
 				E1B3B0A7177D9A2E00209F6D /* main.m in Sources */,
-				E1B3B0AE177D9A2E00209F6D /* SAPIAppDelegate.m in Sources */,
-				E1B3B0B9177D9BC400209F6D /* SAPIAppController.m in Sources */,
-				E1B3B0BF177D9C4B00209F6D /* SAPIPreferenceController.m in Sources */,
+				8F77497F1D97DB0100ABDF15 /* SAPIEvent.m in Sources */,
+				E1B3B0AE177D9A2E00209F6D /* AppDelegate.m in Sources */,
+				E1B3B0B9177D9BC400209F6D /* AppController.m in Sources */,
+				E1B3B0BF177D9C4B00209F6D /* PreferenceController.m in Sources */,
 				E1A2184A177F831500D0C720 /* SAPISpace.m in Sources */,
+				8F7749821D97DB2600ABDF15 /* SAPIContact.m in Sources */,
+				8F7749931D97E24300ABDF15 /* SAPIGenericApiObject.m in Sources */,
+				8F7749961D97ED5700ABDF15 /* SAPIIcon.m in Sources */,
+				8F7749731D97D88300ABDF15 /* SAPILocation.m in Sources */,
+				8F7749851D97DD8E00ABDF15 /* SAPISensors.m in Sources */,
+				8F7749761D97D95400ABDF15 /* SAPISpaceFed.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +443,8 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "spaceapi-osx/spaceapi-osx-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -403,6 +485,8 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "spaceapi-osx/spaceapi-osx-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;

@@ -7,7 +7,7 @@
   GERMAN
 */
 
-/* SAPIAppController */
+/* AppController */
 
 "Space: no message" = "Space: Keine Statusmeldung";
 "Space: %@" = "Space: %@";

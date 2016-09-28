@@ -6,19 +6,23 @@
 //  Copyright (c) 2013 Andreas Pfohl. All rights reserved.
 //
 
+#import "PreferenceController.h"
+#import "AppController.h"
 #import "SAPISpace.h"
-#import "SAPIPreferenceController.h"
-#import "SAPIAppController.h"
+#import "SAPILocation.h"
+#import "SAPISpaceFed.h"
 
-NSString * const SAPIOpenStatusChangedNotification = @"SAPIOpenStatusChanged";
-NSString * const SAPIStatusUpdateFailedNotification = @"SAPIStatusUpdateFailed";
-NSString * const SAPIHasInvalidJsonNotification = @"SAPIHasInvalidJsonNotification";
+NSString * const SAPIOpenStatusChangedNotification      = @"SAPIOpenStatusChanged";
+NSString * const SAPIStatusUpdateFailedNotification     = @"SAPIStatusUpdateFailed";
+NSString * const SAPIHasInvalidJsonNotification         = @"SAPIHasInvalidJsonNotification";
 
 @implementation SAPISpace {
-    NSDictionary *_spaceData;
+    NSDictionary *_spaceDictionary;
     NSOperationQueue *_workerQueue;
     NSTimer *_fetchTimer;
 }
+
+#pragma mark - construction
 
 - (id) initWithName:(NSString *)name andAPIURL:(NSString *)apiURL {
     self = [super init];
@@ -27,55 +31,95 @@ NSString * const SAPIHasInvalidJsonNotification = @"SAPIHasInvalidJsonNotificati
         self.name = name;
         self.apiURL = apiURL;
         [self setOpen:NO];
-
-        _fetchTimer = [NSTimer scheduledTimerWithTimeInterval:[SAPIPreferenceController updateInterval] target:self selector:@selector(timerFetchData:) userInfo:nil repeats:NO];
+        [self timerStart];
     }
-
     return self;
 }
 
+#pragma mark - timer management
+
+- (void) timerStart {
+    if( _fetchTimer && [_fetchTimer isValid] ) {
+        [_fetchTimer invalidate];
+    }
+    _fetchTimer = [NSTimer scheduledTimerWithTimeInterval:[PreferenceController updateInterval] target:self selector:@selector(timerFetchData:) userInfo:nil repeats:NO];
+}
+
 - (void) timerCancel {
-    [_fetchTimer invalidate];
+    if( _fetchTimer && [_fetchTimer isValid] ) {
+        [_fetchTimer invalidate];
+    }
     _fetchTimer = nil;
 }
 
 - (void) timerFetchData:(NSTimer *)aTimer {
     [self fetchSpaceStatus];
-    _fetchTimer = [NSTimer scheduledTimerWithTimeInterval:[SAPIPreferenceController updateInterval] target:self selector:@selector(timerFetchData:) userInfo:nil repeats:NO];
+}
+
+#pragma mark - json fetching
+
+- (NSDictionary*) jsonMapping {
+    return @{@"api":@"NSString",
+             @"space":@"NSString",
+             @"logo":@"NSString",
+             @"url":@"NSString",
+             @"location":@"SAPILocation",
+             @"spacefed":@"SAPISpaceFed",
+             @"cams":@"NSArray",
+             @"stream":@"SAPIStream",
+             @"state":@"SAPIState",
+             @"events":@"NSArray",
+             @"contact":@"SAPIContact",
+             @"issue_report_channels":@"NSArray",
+             @"sensors":@"SAPISensors",
+             @"feeds":@"SAPIFeeds",
+             @"cache":@"SAPICache",
+             @"projects":@"NSArray",
+             @"radio_show":@"NSArray"};
 }
 
 - (void) fetchSpaceStatus {
+    [self timerStart];
     NSURL *spaceAPIUrl = [NSURL URLWithString:self.apiURL];
     NSURLRequest *spaceAPIRequest = [[NSURLRequest alloc] initWithURL:spaceAPIUrl cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30.0f];
     [NSURLConnection sendAsynchronousRequest:spaceAPIRequest queue:_workerQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         if (data && !error) {
             NSError *jsonError;
             NSString *jsonRawString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            _spaceData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
+            _spaceDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
             // SANITIZE DATA...
-            _spaceData = [SAPIAppController dictionaryByReplacingNullsWithStringsInDictionary:_spaceData];
+            LOG( @"%@: JSON DICTIONARY IS...\n---\n%@\n---\n\n", NSStringFromClass([self class]), _spaceDictionary );
+            _spaceDictionary = [AppController dictionaryByReplacingNullsWithStringsInDictionary:_spaceDictionary];
             @try {
                 if( !jsonError ) {
-                    NSNumber *openStatus;
-                    NSString *statusMessage;
-                    NSString *version = [_spaceData objectForKey:@"api"];
+                    BOOL useModernParsing = NO;
                     
-                    if (version) {
-                        if ([version isEqualToString:@"0.11"] || [version isEqualToString:@"0.12"]) {
-                            openStatus = [_spaceData objectForKey:@"open"];
-                            statusMessage = [_spaceData objectForKey:@"status"];
-                        } else {
-                            openStatus = [[_spaceData objectForKey:@"state"] objectForKey:@"open"];
-                            statusMessage = [[_spaceData objectForKey:@"state"] objectForKey:@"message"];
-                        }
+                    if( useModernParsing ) {
+                        [self jsonTakeValuesFromDictionary:_spaceDictionary forApiVersion:[_spaceDictionary objectForKey:@"api"]];
+                    }
+                    else {
+                        NSNumber *openStatus;
+                        NSString *statusMessage;
+                        NSString *version = [_spaceDictionary objectForKey:@"api"];
                         
-                        NSDictionary *userInfo = [NSMutableDictionary dictionaryWithObject:openStatus forKey:@"openStatus"];
-                        if (statusMessage) {
-                            [userInfo setValue:statusMessage forKey:@"statusMessage"];
+                        if (version) {
+                            if ([version isEqualToString:@"0.11"] || [version isEqualToString:@"0.12"]) {
+                                openStatus = [_spaceDictionary objectForKey:@"open"];
+                                statusMessage = [_spaceDictionary objectForKey:@"status"];
+                            }
+                            else {
+                                openStatus = [[_spaceDictionary objectForKey:@"state"] objectForKey:@"open"];
+                                statusMessage = [[_spaceDictionary objectForKey:@"state"] objectForKey:@"message"];
+                            }
+                            
+                            NSDictionary *userInfo = [NSMutableDictionary dictionaryWithObject:openStatus forKey:@"openStatus"];
+                            if (statusMessage) {
+                                [userInfo setValue:statusMessage forKey:@"statusMessage"];
+                            }
+                            [[NSNotificationCenter defaultCenter] postNotificationName:SAPIOpenStatusChangedNotification object:self userInfo:userInfo];
+                            
+                            [self setOpen:[openStatus boolValue]];
                         }
-                        [[NSNotificationCenter defaultCenter] postNotificationName:SAPIOpenStatusChangedNotification object:self userInfo:userInfo];
-                        
-                        [self setOpen:[openStatus boolValue]];
                     }
                 }
                 else {
@@ -86,7 +130,7 @@ NSString * const SAPIHasInvalidJsonNotification = @"SAPIHasInvalidJsonNotificati
                 }
             }
             @catch (NSException *exception) {
-                NSLog( @"_spaceData decoding Error: %@\n\n---\n%@", _spaceData, exception );
+                LOG( @"_spaceDictionary decoding Error: %@\n\n---\n%@", _spaceDictionary, exception );
                 [[NSNotificationCenter defaultCenter] postNotificationName:SAPIStatusUpdateFailedNotification object:self userInfo:nil];
             }
         }

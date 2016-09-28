@@ -8,7 +8,7 @@
 */
 
 
-/* SAPIAppController */
+/* AppController */
 
 "Space: no message" = "Space: no message";
 "Space: %@" = "Space: %@";

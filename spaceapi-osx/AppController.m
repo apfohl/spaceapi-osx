@@ -1,26 +1,22 @@
 //
-//  SAPIAppController.m
+//  AppController.m
 //  SpaceAPI
 //
 //  Created by Andreas Pfohl on 28.06.13.
 //  Copyright (c) 2013 Andreas Pfohl. All rights reserved.
 //
 
-#import "SAPIAppController.h"
-#import "SAPIPreferenceController.h"
+#import "AppController.h"
+#import "PreferenceController.h"
 #import "SAPISpace.h"
 
-@interface SAPIAppController ()
+@interface AppController ()
 
-@property (nonatomic, strong) SAPIPreferenceController *preferenceController;
-@property (nonatomic, strong) NSImage *imageBug;
-@property (nonatomic, strong) NSImage *imageUnknown;
-@property (nonatomic, strong) NSImage *imageClosed;
-@property (nonatomic, strong) NSImage *imageOpened;
+@property (nonatomic, strong) PreferenceController *preferenceController;
 
 @end
 
-@implementation SAPIAppController {
+@implementation AppController {
     NSOperationQueue *_workerQueue;
     NSDictionary *_spacesDirectory;
     SAPISpace *_selectedSpace;
@@ -29,13 +25,27 @@
 
 #pragma mark - destruction
 
-- (void)dealloc {
+- (void) dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[[NSWorkspace sharedWorkspace] notificationCenter] removeObserver:self];
+}
+
+#pragma mark - sleep/wake detection
+
+- (void) handleSystemSleep:(NSNotification*)notification {
+    LOG( @"%s: %@", __PRETTY_FUNCTION__, [notification name] );
+}
+
+- (void) handleSystemWake:(NSNotification*)notification {
+    LOG( @"%s: %@", __PRETTY_FUNCTION__, [notification name] );
+    // REFRESH STATUS AFTER MACHINE WOKE UP
+    [self actionUpdateStatus:self];
 }
 
 #pragma mark - construction
 
 + (void)initialize {
+    LOG( @"%s", __PRETTY_FUNCTION__ );
     NSMutableDictionary *defaultValues = [NSMutableDictionary dictionary];
     [defaultValues setObject:[NSNumber numberWithLong:300] forKey:SAPIUpdateIntervalKey];
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
@@ -48,15 +58,22 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleOpenStatusChange:) name:SAPIOpenStatusChangedNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleStatusUpdateFailed:) name:SAPIStatusUpdateFailedNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleInvalidJsonError:) name:SAPIHasInvalidJsonNotification object:nil];
+        [[[NSWorkspace sharedWorkspace] notificationCenter] addObserver: self
+                                                               selector: @selector(handleSystemSleep:)
+                                                                   name: NSWorkspaceWillSleepNotification object: NULL];
+        
+        [[[NSWorkspace sharedWorkspace] notificationCenter] addObserver: self
+                                                               selector: @selector(handleSystemWake:)
+                                                                   name: NSWorkspaceDidWakeNotification object: NULL];
     }
     return self;
 }
 
-- (void) awakeFromNib { // NSStatusBarButton
+- (void) awakeFromNib {
     self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
     self.statusItem.button.wantsLayer = YES;
-    self.statusItem.image = self.imageUnknown;
-    self.statusItem.alternateImage = self.imageUnknown;
+    self.statusItem.image = [self imageForStatus:SpaceStatusUnknown];
+    self.statusItem.alternateImage = [self imageForStatus:SpaceStatusUnknown];
     self.statusItem.menu = self.mainMenu;
     self.statusItem.highlightMode = YES;
     inDarkMode = [[[NSAppearance currentAppearance] name] containsString:NSAppearanceNameVibrantDark];
@@ -72,8 +89,8 @@
             return [taggedString componentsSeparatedByString:@","];
         }
         else {
-            NSLog( @"WARNING: EXPECTED DICTIONARY IS ACTUALLY INSTANCE OF: '%@'.", NSStringFromClass( [dictToClean class] ) );
-            NSLog( @"WARNING: CONTENT IS:\n---\n%@\n---\n\n", dictToClean );
+            LOG( @"WARNING: EXPECTED DICTIONARY IS ACTUALLY INSTANCE OF: '%@'.", NSStringFromClass( [dictToClean class] ) );
+            LOG( @"WARNING: CONTENT IS:\n---\n%@\n---\n\n", dictToClean );
             return dictToClean;
         }
     }
@@ -84,8 +101,8 @@
     for( NSString *currentKey in dictToClean ) {
         id currentObject = [dictToClean objectForKey:currentKey];
         if( currentObject == nul ) {
-            NSLog( @"WARNING: KEY '%@' WAS CONTAINING <null>-VALUE.", currentKey );
-            NSLog( @"WARNING: BELONGED TO DICTIONARY '%@'.", dictToClean );
+            LOG( @"WARNING: KEY '%@' WAS CONTAINING <null>-VALUE.", currentKey );
+            LOG( @"WARNING: BELONGED TO DICTIONARY '%@'.", dictToClean );
             [replaced setObject:blank forKey:currentKey];
         }
         else if( [currentObject isKindOfClass:[NSDictionary class]] ) {
@@ -102,39 +119,31 @@
     return [NSDictionary dictionaryWithDictionary:replaced];
 }
 
-- (SAPIPreferenceController *)preferenceController {
+- (PreferenceController *)preferenceController {
     if (!_preferenceController) {
-        _preferenceController = [[SAPIPreferenceController alloc] init];
+        _preferenceController = [[PreferenceController alloc] init];
     }
     return _preferenceController;
 }
 
-- (NSImage*) imageBug {
-    if( !_imageBug ) {
-        _imageBug = [NSImage imageNamed:inDarkMode ? @"bug" : @"bug"];
+- (NSImage*) imageForStatus:(SpaceStatus)status {
+    switch( status ) {
+        case SpaceStatusUnknown:
+            return [NSImage imageNamed:inDarkMode ? @"unknown_dark" : @"unknown"];
+            break;
+        case SpaceStatusJsonBug:
+            return [NSImage imageNamed:inDarkMode ? @"bug" : @"bug"];
+            break;
+        case SpaceStatusOpen:
+            return [NSImage imageNamed:inDarkMode ? @"open_dark" : @"open"];
+            break;
+        case SpaceStatusClosed:
+            return [NSImage imageNamed:inDarkMode ? @"closed_dark" : @"closed"];
+            break;
+            
+        default:
+            break;
     }
-    return _imageBug;
-}
-
-- (NSImage*) imageUnknown {
-    if( !_imageUnknown ) {
-        _imageUnknown = [NSImage imageNamed:inDarkMode ? @"unknown_dark" : @"unknown"];
-    }
-    return _imageUnknown;
-}
-
-- (NSImage*) imageClosed {
-    if( !_imageClosed ) {
-        _imageClosed = [NSImage imageNamed:inDarkMode ? @"closed_dark" : @"closed"];
-    }
-    return _imageClosed;
-}
-
-- (NSImage*) imageOpened {
-    if( !_imageOpened ) {
-        _imageOpened = [NSImage imageNamed:inDarkMode ? @"open_dark" : @"open"];
-    }
-    return _imageOpened;
 }
 
 - (void) updateMenuItemEnabled:(BOOL)enabled containingString:(NSString*)stringSearch withString:(NSString*)stringTitle {
@@ -160,14 +169,11 @@
 }
 
 - (void) selectSpace:(NSString *)name {
-    if( _selectedSpace ) {
-        [_selectedSpace timerCancel];
-    }
-    SAPISpace *space = [[SAPISpace alloc] initWithName:name andAPIURL:[_spacesDirectory objectForKey:name]];
-    [space fetchSpaceStatus];
-    _selectedSpace = space;
-    self.selectedSpaceItem.title = [NSString stringWithFormat:LOC( @"Space: %@" ), space.name];
-    [SAPIPreferenceController setSelectedSpace:space.name];
+    [_selectedSpace timerCancel];
+    _selectedSpace = [[SAPISpace alloc] initWithName:name andAPIURL:[_spacesDirectory objectForKey:name]];
+    [self actionUpdateStatus:self];
+    self.selectedSpaceItem.title = [NSString stringWithFormat:LOC( @"Space: %@" ), _selectedSpace.name];
+    [PreferenceController setSelectedSpace:_selectedSpace.name];
     NSArray *spaceEntries = self.spacesMenu.itemArray;
     for( NSMenuItem *currentItem in spaceEntries ) {
         if( [currentItem.title isEqualToString:_selectedSpace.name] ) {
@@ -186,12 +192,12 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         NSDictionary *userInfo = [notification userInfo];
         [self stopPulseAnimationOnView:self.statusItem.button];
-        self.statusItem.image = self.imageBug;
-        self.statusItem.alternateImage = self.imageBug;
+        self.statusItem.image = [self imageForStatus:SpaceStatusJsonBug];
+        self.statusItem.alternateImage = [self imageForStatus:SpaceStatusJsonBug];
         self.selectedSpaceMessage.title = [NSString stringWithFormat:@"ERROR:\n%@", [userInfo objectForKey:@"error"]];
         self.statusItem.button.toolTip = self.selectedSpaceMessage.title;
         self.selectedSpaceMessage.hidden = NO;
-        NSLog( @"\n*** FATAL-API-FAIL ***\n\n  API: %@\n  URL: %@\nERROR: %@\n JSON: %@\n", [userInfo objectForKey:@"apicall"],[userInfo objectForKey:@"url"], [userInfo objectForKey:@"error"], [userInfo objectForKey:@"json"]);
+        LOG( @"\n*** FATAL-API-FAIL ***\n\n  API: %@\n  URL: %@\nERROR: %@\n JSON: %@\n", [userInfo objectForKey:@"apicall"],[userInfo objectForKey:@"url"], [userInfo objectForKey:@"error"], [userInfo objectForKey:@"json"]);
     });
 }
 
@@ -205,17 +211,18 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self stopPulseAnimationOnView:self.statusItem.button];
         @try {
-                self.statusItem.image = [[[notification userInfo] objectForKey:@"openStatus"] boolValue] ? self.imageOpened : self.imageClosed;
-                self.statusItem.alternateImage = [[[notification userInfo] objectForKey:@"openStatus"] boolValue] ? self.imageOpened : self.imageClosed;
-                NSString *statusMessage = [[notification userInfo] objectForKey:@"statusMessage"];
-                self.selectedSpaceMessage.title = statusMessage ?: LOC( @"Space: no message" );
-                self.statusItem.button.toolTip = self.selectedSpaceMessage.title;
-                self.selectedSpaceMessage.hidden = ( statusMessage == nil );
+            BOOL isStatusOpen = [[[notification userInfo] objectForKey:@"openStatus"] boolValue];
+            self.statusItem.image = [self imageForStatus:isStatusOpen ? SpaceStatusOpen : SpaceStatusClosed];
+            self.statusItem.alternateImage = [self imageForStatus:isStatusOpen ? SpaceStatusOpen : SpaceStatusClosed];
+            NSString *statusMessage = [[notification userInfo] objectForKey:@"statusMessage"];
+            self.selectedSpaceMessage.title = statusMessage ?: LOC( @"Space: no message" );
+            self.statusItem.button.toolTip = self.selectedSpaceMessage.title;
+            self.selectedSpaceMessage.hidden = ( statusMessage == nil );
         }
         @catch (NSException *exception) {
-            NSLog( @"handleOpenStatusChange Error: %@\n\n---\n%@", [notification userInfo], exception );
-            self.statusItem.image = self.imageBug;
-            self.statusItem.alternateImage = self.imageBug;
+            LOG( @"handleOpenStatusChange Error: %@\n\n---\n%@", [notification userInfo], exception );
+            self.statusItem.image = [self imageForStatus:SpaceStatusJsonBug];
+            self.statusItem.alternateImage = [self imageForStatus:SpaceStatusJsonBug];
             self.selectedSpaceMessage.title = [NSString stringWithFormat:@"BUG IN JSON:\n%@\nEXCEPTION:%@\n", [notification userInfo], exception];
             self.statusItem.button.toolTip = self.selectedSpaceMessage.title;
             self.selectedSpaceMessage.hidden = NO;
@@ -234,7 +241,7 @@
             if( !jsonError ) {
                 @try {
                     // SANITIZE DATA...
-                    _spacesDirectory = [SAPIAppController dictionaryByReplacingNullsWithStringsInDictionary:_spacesDirectory];
+                    _spacesDirectory = [AppController dictionaryByReplacingNullsWithStringsInDictionary:_spacesDirectory];
                     [[NSOperationQueue mainQueue] addOperationWithBlock:^(void) {
                         [self.spacesMenu removeItemAtIndex:0];
                     }];
@@ -249,7 +256,7 @@
                         }];
                     }
 
-                    NSString *spaceName = [SAPIPreferenceController selectedSpace];
+                    NSString *spaceName = [PreferenceController selectedSpace];
                     if( spaceName ) {
                         [[NSOperationQueue mainQueue] addOperationWithBlock:^(void) {
                             [self selectSpace:spaceName];
@@ -257,9 +264,9 @@
                     }
                 }
                 @catch (NSException *exception) {
-                    NSLog( @"fetchSpaceDirectory Error decoding JSON: %@\n\n---\n%@", _spacesDirectory, exception );
-                    self.statusItem.image = self.imageBug;
-                    self.statusItem.alternateImage = self.imageBug;
+                    LOG( @"fetchSpaceDirectory Error decoding JSON: %@\n\n---\n%@", _spacesDirectory, exception );
+                    self.statusItem.image = [self imageForStatus:SpaceStatusJsonBug];
+                    self.statusItem.alternateImage = [self imageForStatus:SpaceStatusJsonBug];
                     self.selectedSpaceMessage.title = [NSString stringWithFormat:@"BUG IN JSON:\n%@\nEXCEPTION:%@\n", _spacesDirectory, exception];
                     self.statusItem.button.toolTip = self.selectedSpaceMessage.title;
                     self.selectedSpaceMessage.hidden = NO;
@@ -316,8 +323,8 @@
 }
 
 - (IBAction) actionSelectSpaceFromMenu:(NSMenuItem *)sender {
-    self.statusItem.image = self.imageUnknown;
-    self.statusItem.alternateImage = self.imageUnknown;
+    self.statusItem.image = [self imageForStatus:SpaceStatusUnknown];
+    self.statusItem.alternateImage = [self imageForStatus:SpaceStatusUnknown];
     self.statusItem.button.toolTip = LOC( @"Space: no message" );
     self.selectedSpaceMessage.title = LOC( @"Space: no message" );
     self.selectedSpaceMessage.hidden = YES;
@@ -325,9 +332,9 @@
     [self selectSpace:sender.title];
 }
 
-- (IBAction) actionUpdateStatus:(NSMenuItem *)sender {
-    self.statusItem.image = self.imageUnknown;
-    self.statusItem.alternateImage = self.imageUnknown;
+- (IBAction) actionUpdateStatus:(id)sender {
+    self.statusItem.image = [self imageForStatus:SpaceStatusUnknown];
+    self.statusItem.alternateImage = [self imageForStatus:SpaceStatusUnknown];
     [self startPulseAnimationOnView:self.statusItem.button];
     [_selectedSpace fetchSpaceStatus];
 }

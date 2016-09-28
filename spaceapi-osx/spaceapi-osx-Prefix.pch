@@ -7,4 +7,18 @@
 #endif
 
 // LOCALIZATION
-#define LOC(someString)                                         NSLocalizedString(someString,nil)
+#define LOC( someString )                               NSLocalizedString( someString, nil )
+
+// KEEP 0 FOR DEPLOYMENT
+#define DEBUG_MASTER                                    1
+
+// OVERRIDE DEBUG FLAG DEFINED BY XCODE
+#ifndef DEBUG
+#define DEBUG DEBUG_MASTER
+#else
+#undef DEBUG
+#define DEBUG DEBUG_MASTER
+#endif
+
+// LOGGING
+#define LOG( someString, ... )                          if( DEBUG ) NSLog( someString, ##__VA_ARGS__ )

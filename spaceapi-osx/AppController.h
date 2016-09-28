@@ -1,5 +1,5 @@
 //
-//  SAPIAppController.h
+//  AppController.h
 //  SpaceAPI
 //
 //  Created by Andreas Pfohl on 28.06.13.
@@ -10,7 +10,14 @@
 #import <Quartz/Quartz.h>
 #import "SAPISpace.h"
 
-@interface SAPIAppController : NSObject
+typedef enum {
+    SpaceStatusUnknown,
+    SpaceStatusJsonBug,
+    SpaceStatusOpen,
+    SpaceStatusClosed
+} SpaceStatus;
+
+@interface AppController : NSObject
 
 @property (strong) IBOutlet NSStatusItem *statusItem;
 @property (weak) IBOutlet NSMenu *mainMenu;
@@ -22,7 +29,7 @@
 
 - (IBAction) actionShowPreferencePanel:(NSMenuItem *)sender;
 - (IBAction) actionSelectSpaceFromMenu:(NSMenuItem *)sender;
-- (IBAction) actionUpdateStatus:(NSMenuItem *)sender;
+- (IBAction) actionUpdateStatus:(id)sender;
 
 - (void) startPulseAnimationOnView:(NSView*)view;
 - (void) stopPulseAnimationOnView:(NSView*)view;

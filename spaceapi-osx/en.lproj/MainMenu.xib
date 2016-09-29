@@ -47,6 +47,12 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="Fag-aR-vxk"/>
+                <menuItem title="About" id="pww-JS-oFp">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="orderFrontStandardAboutPanel:" target="-1" id="oCk-fe-Ack"/>
+                    </connections>
+                </menuItem>
                 <menuItem title="Version" id="NPI-hU-FUu">
                     <modifierMask key="keyEquivalentModifierMask"/>
                 </menuItem>

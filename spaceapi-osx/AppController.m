@@ -262,18 +262,22 @@
         @try {
             NSString *statusMessage = [[notification userInfo] objectForKey:@"statusMessage"];
             BOOL isStatusOpen = [[[notification userInfo] objectForKey:@"openStatus"] boolValue];
+            
             SpaceStatus statusUpdated = isStatusOpen ? SpaceStatusOpen : SpaceStatusClosed;
+            BOOL shouldNotifyUser = DEBUG_FORCE_NOTIFICATION;
+            if( self.latestStatus == SpaceStatusZero || self.latestStatus == SpaceStatusUnknown ) {
+                // INITIAL SET OF STATUS
+                self.latestSpaceStatusMessage = statusMessage;
+            }
             if( self.latestStatus != statusUpdated && ( (self.latestStatus == SpaceStatusOpen) | (self.latestStatus == SpaceStatusClosed) ) ) {
                 self.latestSpaceStatusMessage = statusMessage;
-                if( !DEBUG_FORCE_NOTIFICATION ) {
-                    [self notifyUserStatusChangedWithMessage:statusMessage];
-                }
+                shouldNotifyUser = YES; // BECAUSE STATUS CHANGED
             }
             else {
                 // NOTIFY USER WHEN STATUS MESSAGE CHANGES (EVEN IF STATUS ITSELF STAYS THE SAME)
                 if( ![statusMessage isEqualToString:self.latestSpaceStatusMessage] ) {
+                    shouldNotifyUser = YES; // BECAUSE STATUS MESSAGE WAS CHANGED
                     self.latestSpaceStatusMessage = statusMessage;
-                    [self notifyUserStatusChangedWithMessage:statusMessage];
                 }
             }
             self.latestStatus = isStatusOpen ? SpaceStatusOpen : SpaceStatusClosed;
@@ -282,7 +286,7 @@
             self.selectedSpaceMessage.title = statusMessage ?: LOC( @"Space: no message" );
             self.statusItem.button.toolTip = self.selectedSpaceMessage.title;
             self.selectedSpaceMessage.hidden = ( statusMessage == nil );
-            if( DEBUG_FORCE_NOTIFICATION ) {
+            if( shouldNotifyUser ) {
                 [self notifyUserStatusChangedWithMessage:statusMessage];
             }
         }

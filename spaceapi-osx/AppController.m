@@ -391,6 +391,11 @@
 
 #pragma mark - user actions
 
+- (IBAction) actionShowAbout:(id)sender {
+    [[NSApplication sharedApplication] orderFrontStandardAboutPanel:sender];
+    [[NSApplication sharedApplication] arrangeInFront:[NSApplication sharedApplication].windows];
+}
+
 - (IBAction) actionShowPreferencePanel:(id)sender {
     [self.preferenceController showWindow:self];
 }

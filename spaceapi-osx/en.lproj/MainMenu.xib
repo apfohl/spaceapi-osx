@@ -50,7 +50,7 @@
                 <menuItem title="About" id="pww-JS-oFp">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="orderFrontStandardAboutPanel:" target="-1" id="oCk-fe-Ack"/>
+                        <action selector="actionShowAbout:" target="544" id="hNO-w3-jRF"/>
                     </connections>
                 </menuItem>
                 <menuItem title="Version" id="NPI-hU-FUu">

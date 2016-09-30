@@ -50,7 +50,7 @@
                 <menuItem title="About" id="9I5-NA-Zh8">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="orderFrontStandardAboutPanel:" target="-1" id="iHQ-zL-U9q"/>
+                        <action selector="actionShowAbout:" target="544" id="422-V6-Nvg"/>
                     </connections>
                 </menuItem>
                 <menuItem title="Version" id="NPI-hU-FUu">

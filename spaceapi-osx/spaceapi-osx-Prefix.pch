@@ -10,7 +10,7 @@
 #define LOC( someString )                               NSLocalizedString( someString, nil )
 
 // KEEP 0 FOR DEPLOYMENT
-#define DEBUG_MASTER                                    0
+#define DEBUG_MASTER                                    1
 #define DEBUG_FORCE_NOTIFICATION                        0
 
 // OVERRIDE DEBUG FLAG DEFINED BY XCODE

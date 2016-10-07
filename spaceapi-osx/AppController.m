@@ -315,10 +315,12 @@
                 @try {
                     // SANITIZE DATA...
                     _spacesDirectory = [AppController dictionaryByReplacingNullsWithStringsInDictionary:_spacesDirectory];
+                    // TODO: save the dictionary a PLIST-cache file
                     [[NSOperationQueue mainQueue] addOperationWithBlock:^(void) {
                         [self.spacesMenu removeItemAtIndex:0];
                     }];
                     
+                    // TODO: operate on CACHE-file from now on
                     NSMenuItem *currentSpaceItem = nil;
                     for (NSString *name in [[_spacesDirectory allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)]) {
                         currentSpaceItem = [[NSMenuItem alloc] initWithTitle:name action:@selector(actionSelectSpaceFromMenu:) keyEquivalent:@""];
@@ -346,13 +348,43 @@
                 }
             }
             else {
+                // TODO: use CACHE file instead and carry on...
+                LOG( @"JSON ERROR, WHILE FETCHING DIRECTORY." );
                 if( !jsonRawString ) {
                     jsonRawString = @"[NIL]";
                 }
                 [[NSNotificationCenter defaultCenter] postNotificationName:SAPIHasInvalidJsonNotification object:self userInfo:@{@"error":jsonError, @"json":jsonRawString,@"apicall":@"spacedirectory",@"url":[spaceAPIDirectoryUrl absoluteString]}];
+                
+                // ALERT
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    NSAlert *alert = [[NSAlert alloc] init];
+                    [alert addButtonWithTitle:LOC( @"OK" )];
+                    [alert addButtonWithTitle:LOC( @"Try again..." )];
+                    [alert setMessageText:LOC( @"Error fetching Hackerspaces" )];
+                    [alert setInformativeText:LOC( @"The server providing the directory of spaceAPI listed Hackerspaces did not deliver expected data." )];
+                    [alert setAlertStyle:NSWarningAlertStyle];
+                    NSUInteger buttonIndex = [alert runModal];
+                    if( buttonIndex == NSAlertFirstButtonReturn ) {
+                        // OK clicked
+                    }
+                    else if( buttonIndex == NSAlertSecondButtonReturn ) {
+                        [self fetchSpaceDirectory];
+                    }
+                });
             }
         }
     }];
+    // TODO: fix error on load with empty json fetch
+    /*
+     2016-10-04 19:22:10.870 spaceapi-osx[992:31320] JSON ERROR, WHILE FETCHING DIRECTORY.
+     2016-10-04 19:22:10.871 spaceapi-osx[992:31231]
+     *** FATAL-API-FAIL ***
+     
+     API: spacedirectory
+     URL: http://spaceapi.net/directory.json
+     ERROR: Error Domain=NSCocoaErrorDomain Code=3840 "No value." UserInfo={NSDebugDescription=No value.}
+     JSON:
+     */
 }
 
 #pragma mark - animations
@@ -389,6 +421,10 @@
     }
 }
 
+- (BOOL) hasValidSpaceDirectory {
+    return ( _spacesDirectory && [_spacesDirectory count] > 0 );
+}
+
 #pragma mark - user actions
 
 - (IBAction) actionShowAbout:(id)sender {
@@ -413,6 +449,10 @@
 }
 
 - (IBAction) actionUpdateStatus:(id)sender {
+    if( ![self hasValidSpaceDirectory] ) {
+        [self fetchSpaceDirectory];
+        return;
+    }
     self.latestStatus = SpaceStatusZero;
     self.latestSpaceStatusMessage = nil;
     self.statusItem.image = [self imageForStatus:SpaceStatusUnknown];

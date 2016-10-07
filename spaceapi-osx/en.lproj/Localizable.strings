@@ -16,3 +16,8 @@
 "Is now open." = "Is now open.";
 "Is now closed." = "Is now closed.";
 "Error in spaceAPI." = "Error in spaceAPI.";
+
+"OK" = "OK";
+"Try again..." = "Try again...";
+"Error fetching Hackerspaces" = "Error fetching Hackerspaces";
+"The server providing the directory of spaceAPI listed Hackerspaces did not deliver expected data." = "The server providing the directory of spaceAPI listed Hackerspaces did not deliver expected data.";

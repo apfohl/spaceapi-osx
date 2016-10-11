@@ -21,5 +21,14 @@
 #define DEBUG DEBUG_MASTER
 #endif
 
+// URLS
+#define kURL_SPACE_DIRECTORY                            @"http://spaceapi.net/directory.json"
+
 // LOGGING
 #define LOG( someString, ... )                          if( DEBUG ) NSLog( someString, ##__VA_ARGS__ )
+
+// CACHE DIRECTORY
+#define kCACHE_DIRECTORY_NAME                           @"cached_directory"
+#define kCACHE_SUFFIX                                   @"plist"
+#define USER_CACHES_FOLDER [NSSearchPathForDirectoriesInDomains( NSCachesDirectory, NSUserDomainMask, YES ) objectAtIndex:0]
+

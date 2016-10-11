@@ -303,52 +303,55 @@
     });
 }
 
+- (void) alertFailedToFetchDirectory {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:LOC( @"OK" )];
+        [alert addButtonWithTitle:LOC( @"Try again..." )];
+        [alert setMessageText:LOC( @"Error fetching Hackerspaces" )];
+        [alert setInformativeText:LOC( @"The server providing the directory of spaceAPI listed Hackerspaces did not deliver expected data." )];
+        [alert setAlertStyle:NSWarningAlertStyle];
+        NSUInteger buttonIndex = [alert runModal];
+        if( buttonIndex == NSAlertFirstButtonReturn ) {
+            // OK clicked
+        }
+        else if( buttonIndex == NSAlertSecondButtonReturn ) {
+            [self fetchSpaceDirectory];
+        }
+    });
+}
+
 - (void) fetchSpaceDirectory {
-    NSURL *spaceAPIDirectoryUrl = [NSURL URLWithString:@"http://spaceapi.net/directory.json"];
-    NSURLRequest *spaceAPIDirectoryRequest = [[NSURLRequest alloc] initWithURL:spaceAPIDirectoryUrl];
+    NSURL *spaceAPIDirectoryUrl = [NSURL URLWithString:kURL_SPACE_DIRECTORY];
+    NSURLRequest *spaceAPIDirectoryRequest = [[NSURLRequest alloc] initWithURL:spaceAPIDirectoryUrl cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30.0f];
+
     [NSURLConnection sendAsynchronousRequest:spaceAPIDirectoryRequest queue:_workerQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         if( data && !error ) {
             NSError *jsonError;
             NSString *jsonRawString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            _spacesDirectory = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
+            NSDictionary *tempDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
             if( !jsonError ) {
                 @try {
                     // SANITIZE DATA...
-                    _spacesDirectory = [AppController dictionaryByReplacingNullsWithStringsInDictionary:_spacesDirectory];
+                    tempDict = [AppController dictionaryByReplacingNullsWithStringsInDictionary:tempDict];
                     // TODO: save the dictionary a PLIST-cache file
-                    [[NSOperationQueue mainQueue] addOperationWithBlock:^(void) {
-                        [self.spacesMenu removeItemAtIndex:0];
-                    }];
+                    [self cacheSaveDirectoryIfValid:tempDict];
                     
-                    // TODO: operate on CACHE-file from now on
-                    NSMenuItem *currentSpaceItem = nil;
-                    for (NSString *name in [[_spacesDirectory allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)]) {
-                        currentSpaceItem = [[NSMenuItem alloc] initWithTitle:name action:@selector(actionSelectSpaceFromMenu:) keyEquivalent:@""];
-                        currentSpaceItem.target = self;
-                        
-                        [[NSOperationQueue mainQueue] addOperationWithBlock:^(void) {
-                            [self.spacesMenu addItem:currentSpaceItem];
-                        }];
-                    }
-
-                    NSString *spaceName = [PreferenceController selectedSpace];
-                    if( spaceName ) {
-                        [[NSOperationQueue mainQueue] addOperationWithBlock:^(void) {
-                            [self selectSpace:spaceName];
-                        }];
-                    }
+                    [self updateSpacesMenu];
+                    
+                    [self selectSpaceFromCache];
                 }
                 @catch (NSException *exception) {
-                    LOG( @"fetchSpaceDirectory Error decoding JSON: %@\n\n---\n%@", _spacesDirectory, exception );
+                    LOG( @"fetchSpaceDirectory Error decoding JSON: %@\n\n---\n%@", tempDict, exception );
                     self.statusItem.image = [self imageForStatus:SpaceStatusJsonBug];
                     self.statusItem.alternateImage = [self imageForStatus:SpaceStatusJsonBug];
-                    self.selectedSpaceMessage.title = [NSString stringWithFormat:@"BUG IN JSON:\n%@\nEXCEPTION:%@\n", _spacesDirectory, exception];
+                    self.selectedSpaceMessage.title = [NSString stringWithFormat:@"BUG IN JSON:\n%@\nEXCEPTION:%@\n", tempDict, exception];
                     self.statusItem.button.toolTip = self.selectedSpaceMessage.title;
                     self.selectedSpaceMessage.hidden = NO;
                 }
             }
             else {
-                // TODO: use CACHE file instead and carry on...
+                // WILL NOT REPLACE CACHE OF DIRECTORY, BUT INSTEAD SPIT OUT ERROR ALERT
                 LOG( @"JSON ERROR, WHILE FETCHING DIRECTORY." );
                 if( !jsonRawString ) {
                     jsonRawString = @"[NIL]";
@@ -356,35 +359,131 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:SAPIHasInvalidJsonNotification object:self userInfo:@{@"error":jsonError, @"json":jsonRawString,@"apicall":@"spacedirectory",@"url":[spaceAPIDirectoryUrl absoluteString]}];
                 
                 // ALERT
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    NSAlert *alert = [[NSAlert alloc] init];
-                    [alert addButtonWithTitle:LOC( @"OK" )];
-                    [alert addButtonWithTitle:LOC( @"Try again..." )];
-                    [alert setMessageText:LOC( @"Error fetching Hackerspaces" )];
-                    [alert setInformativeText:LOC( @"The server providing the directory of spaceAPI listed Hackerspaces did not deliver expected data." )];
-                    [alert setAlertStyle:NSWarningAlertStyle];
-                    NSUInteger buttonIndex = [alert runModal];
-                    if( buttonIndex == NSAlertFirstButtonReturn ) {
-                        // OK clicked
-                    }
-                    else if( buttonIndex == NSAlertSecondButtonReturn ) {
-                        [self fetchSpaceDirectory];
-                    }
-                });
+                [self alertFailedToFetchDirectory];
             }
         }
+        else {
+            LOG( @"FAILED TO CONNECT TO... %@", kURL_SPACE_DIRECTORY );
+            [self alertFailedToFetchDirectory];
+        }
     }];
-    // TODO: fix error on load with empty json fetch
-    /*
-     2016-10-04 19:22:10.870 spaceapi-osx[992:31320] JSON ERROR, WHILE FETCHING DIRECTORY.
-     2016-10-04 19:22:10.871 spaceapi-osx[992:31231]
-     *** FATAL-API-FAIL ***
-     
-     API: spacedirectory
-     URL: http://spaceapi.net/directory.json
-     ERROR: Error Domain=NSCocoaErrorDomain Code=3840 "No value." UserInfo={NSDebugDescription=No value.}
-     JSON:
-     */
+}
+
+#pragma mark - manage cached data
+
+- (void) initFromCache {
+    // INIT SPACE DIRECTORY WITH A CACHED VERSION FROM BUNDLE IF NECESSARY...
+    LOG( @"CACHE LOCATION: %@", [self cachePathDirectory] );
+    
+    if( ![self hasCachedDirectory] ) {
+        LOG( @"INIT FROM BUNDLE CACHE: %@", [self bundlePathDirectory] );
+        NSDictionary *spaces = [self cacheLoadDirectoryFromPath:[self bundlePathDirectory]];
+        [self cacheSaveDirectory:spaces];
+    }
+    [self updateSpacesMenu];
+    [self selectSpaceFromCache];
+    [self performSelector:@selector(fetchSpaceDirectory) withObject:nil afterDelay:2.0];
+}
+
+- (void) updateSpacesMenu {
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^(void) {
+        [self.spacesMenu removeAllItems];
+    }];
+    
+    _spacesDirectory = [self cacheLoadDirectoryFromPath:[self cachePathDirectory]];
+    NSMenuItem *currentSpaceItem = nil;
+    for (NSString *name in [[_spacesDirectory allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)]) {
+        currentSpaceItem = [[NSMenuItem alloc] initWithTitle:name action:@selector(actionSelectSpaceFromMenu:) keyEquivalent:@""];
+        currentSpaceItem.target = self;
+        
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^(void) {
+            [self.spacesMenu addItem:currentSpaceItem];
+        }];
+    }
+}
+
+- (void) selectSpaceFromCache {
+    NSString *spaceName = [PreferenceController selectedSpace];
+    if( spaceName ) {
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^(void) {
+            [self selectSpace:spaceName];
+        }];
+    }
+}
+
+- (NSString*)bundlePathDirectory {
+    return [[NSBundle mainBundle] pathForResource:kCACHE_DIRECTORY_NAME ofType:kCACHE_SUFFIX];
+}
+
+- (NSString*)cachePathDirectory {
+    NSString *cachesDirectory = USER_CACHES_FOLDER;
+    NSString *cacheFileName = [NSString stringWithFormat:@"%@.%@", kCACHE_DIRECTORY_NAME, kCACHE_SUFFIX];
+    return [cachesDirectory stringByAppendingPathComponent:cacheFileName];
+}
+
+- (BOOL) hasCachedDirectory {
+    NSString *path = [self cachePathDirectory];
+    BOOL hasFile = NO;
+    NSFileManager *fm = [NSFileManager defaultManager];
+    @try {
+        hasFile = [fm fileExistsAtPath:path];
+    }
+    @catch (NSException *exception) {
+        LOG( @"%@", exception );
+        hasFile = NO;
+    }
+    return hasFile;
+}
+
+- (NSDictionary*) cacheLoadDirectoryFromPath:(NSString*)path {
+    LOG( @"CACHE: LOADING..." );
+    NSDictionary *loadedDict = nil;
+    @try {
+        loadedDict = [NSDictionary dictionaryWithContentsOfFile:path];
+    }
+    @catch (NSException *exception) {
+        LOG( @"ERROR READING: %@", exception );
+    }
+    if( !loadedDict ) {
+        loadedDict = [NSDictionary dictionary];
+    }
+    LOG( @"CACHE: HAS %i VALUES.", (int)[loadedDict count] );
+    return loadedDict;
+}
+
+- (void) cacheSaveDirectoryIfValid:(NSDictionary*)dictToSave {
+    LOG( @"CACHE: PLAUSIBILITY CHECK..." );
+    NSUInteger numOfEntriesCached = _spacesDirectory ? [_spacesDirectory count] : 0;
+    NSUInteger numOfEntriesToSave = dictToSave ? [dictToSave count] : 0;
+    // A REFRESHED DIRECTORY OF HACKERSPACES SHOULD NOT VARY IN NUM OF ENTRIES
+    // BY MORE THAN 20 PERCENT OF ALL ENTRIES LESS THAN THE CACHED VARIANT.
+    // IF MORE THAN 20 PERCENT ARE MISSING SOMETHING LOOKS REALLY BADLY WRONG...
+    CGFloat pausibleDifferenceInPercent = 0.2f;
+    CGFloat numOfMinimumEntriesNeeded = numOfEntriesCached - (numOfEntriesCached * pausibleDifferenceInPercent);
+    if( numOfEntriesToSave < numOfMinimumEntriesNeeded ) {
+        LOG( @"CACHE: DATA TO CACHE LOOKS NOT PLAUSIBLE... ABORTING..." );
+        return;
+    }
+    LOG( @"CACHE: LOOKS PLAUSIBLE... SAVING..." );
+    // WE HAVE A PLAUSIBLE VALUE, SAVE IT
+    [self cacheSaveDirectory:dictToSave];
+}
+
+- (void) cacheSaveDirectory:(NSDictionary*)dictToSave {
+    NSString *pathToStore = [self cachePathDirectory];
+    LOG( @"CACHE: SAVING... TO %@", pathToStore );
+    BOOL wasSuccess = NO;
+    @try {
+        wasSuccess = [dictToSave writeToFile:pathToStore atomically:YES];
+    }
+    @catch( NSException *exception ) {
+        wasSuccess = NO;
+        LOG( @"ERROR WRITING: %@", exception );
+    }
+    if( !wasSuccess ) {
+        LOG( @"ERROR WRITING STORAGE:\n%@", pathToStore );
+    }
+    LOG( @"CACHE: HAS %i VALUES.", (int)[dictToSave count] );
 }
 
 #pragma mark - animations

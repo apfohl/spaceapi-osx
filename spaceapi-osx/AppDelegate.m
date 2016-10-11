@@ -12,7 +12,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:self];
-    [self.controller fetchSpaceDirectory];
+    [self.controller initFromCache];
 }
 
 #pragma mark - notifications

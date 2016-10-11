@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F53BEF91DAD81DF004ED40F /* cached_directory.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F53BEF81DAD81DF004ED40F /* cached_directory.plist */; };
 		8F59EED21D96D8AF00DC8EF7 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F59EED41D96D8AF00DC8EF7 /* Preferences.xib */; };
 		8F59EEDA1D96DA0900DC8EF7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8F59EEDC1D96DA0900DC8EF7 /* Localizable.strings */; };
 		8F7749731D97D88300ABDF15 /* SAPILocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7749721D97D88300ABDF15 /* SAPILocation.m */; };
@@ -50,6 +51,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8F53BEF81DAD81DF004ED40F /* cached_directory.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cached_directory.plist; sourceTree = "<group>"; };
 		8F59EECE1D96D87E00DC8EF7 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		8F59EECF1D96D87E00DC8EF7 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8F59EED01D96D87E00DC8EF7 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = de; path = de.lproj/Credits.rtf; sourceTree = "<group>"; };
@@ -166,6 +168,14 @@
 			name = "API Classes";
 			sourceTree = "<group>";
 		};
+		8F53BEFA1DAD81E3004ED40F /* cache */ = {
+			isa = PBXGroup;
+			children = (
+				8F53BEF81DAD81DF004ED40F /* cached_directory.plist */,
+			);
+			name = cache;
+			sourceTree = "<group>";
+		};
 		8F59EED11D96D89900DC8EF7 /* images */ = {
 			isa = PBXGroup;
 			children = (
@@ -260,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				E1E6E6711931354700521581 /* spaceapi-osx.iconset */,
+				8F53BEFA1DAD81E3004ED40F /* cache */,
 				8F7749C81D9C0B3200ABDF15 /* sounds */,
 				8F59EED11D96D89900DC8EF7 /* images */,
 			);
@@ -332,6 +343,7 @@
 				E1FC9E0219312AAB00F5818D /* closed.png in Resources */,
 				E198BCD51B55749D0061045C /* unknown_dark@2x.png in Resources */,
 				E1FC9DFE1931284200F5818D /* open.png in Resources */,
+				8F53BEF91DAD81DF004ED40F /* cached_directory.plist in Resources */,
 				E1FC9E0719312BE600F5818D /* unknown@2x.png in Resources */,
 				8F59EEDA1D96DA0900DC8EF7 /* Localizable.strings in Resources */,
 				E198BCD41B55749D0061045C /* unknown_dark.png in Resources */,

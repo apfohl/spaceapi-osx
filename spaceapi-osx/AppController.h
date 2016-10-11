@@ -30,6 +30,8 @@ typedef enum {
 
 + (NSDictionary *) dictionaryByReplacingNullsWithStringsInDictionary:(NSDictionary*)dictToClean;
 
+- (void) initFromCache;
+
 - (IBAction) actionShowPreferencePanel:(NSMenuItem *)sender;
 - (IBAction) actionSelectSpaceFromMenu:(NSMenuItem *)sender;
 - (IBAction) actionUpdateStatus:(id)sender;

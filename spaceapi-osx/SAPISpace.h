@@ -53,6 +53,7 @@ extern NSString * const SAPIHasInvalidJsonNotification;
 
 - (id) initWithName:(NSString *)name andAPIURL:(NSString *)apiURL;
 - (void) fetchSpaceStatus;
+- (void) timerStart;
 - (void) timerCancel;
 
 @end

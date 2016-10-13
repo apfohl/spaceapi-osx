@@ -35,12 +35,14 @@
 
 - (void) handleSystemSleep:(NSNotification*)notification {
     LOG( @"%s: %@", __PRETTY_FUNCTION__, [notification name] );
+    [_selectedSpace timerCancel];
 }
 
 - (void) handleSystemWake:(NSNotification*)notification {
     LOG( @"%s: %@", __PRETTY_FUNCTION__, [notification name] );
     // REFRESH STATUS AFTER MACHINE WOKE UP
-    [self actionUpdateStatus:self];
+    [self performSelector:@selector(actionUpdateStatus:) withObject:nil afterDelay:10];
+    [_selectedSpace timerStart];
 }
 
 #pragma mark - construction

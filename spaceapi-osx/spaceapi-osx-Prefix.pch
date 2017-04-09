@@ -5,3 +5,30 @@
 #ifdef __OBJC__
   #import <Cocoa/Cocoa.h>
 #endif
+
+// LOCALIZATION
+#define LOC( someString )                               NSLocalizedString( someString, nil )
+
+// KEEP 0 FOR DEPLOYMENT
+#define DEBUG_MASTER                                    1
+#define DEBUG_FORCE_NOTIFICATION                        0
+
+// OVERRIDE DEBUG FLAG DEFINED BY XCODE
+#ifndef DEBUG
+#define DEBUG DEBUG_MASTER
+#else
+#undef DEBUG
+#define DEBUG DEBUG_MASTER
+#endif
+
+// URLS
+#define kURL_SPACE_DIRECTORY                            @"http://spaceapi.net/directory.json"
+
+// LOGGING
+#define LOG( someString, ... )                          if( DEBUG ) NSLog( someString, ##__VA_ARGS__ )
+
+// CACHE DIRECTORY
+#define kCACHE_DIRECTORY_NAME                           @"cached_directory"
+#define kCACHE_SUFFIX                                   @"plist"
+#define USER_CACHES_FOLDER [NSSearchPathForDirectoriesInDomains( NSCachesDirectory, NSUserDomainMask, YES ) objectAtIndex:0]
+

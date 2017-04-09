@@ -1,0 +1,23 @@
+/* 
+  Localizable.strings
+  spaceapi-osx
+
+  Created by Lincoln Six Echo on 24.09.16.
+  Copyright © 2016 Andreas Pfohl. All rights reserved.
+  ENGLISH
+*/
+
+
+/* AppController */
+
+"Space: no message" = "Space: no message";
+"Space: %@" = "Space: %@";
+"Status changed" = "Status changed";
+"Is now open." = "Is now open.";
+"Is now closed." = "Is now closed.";
+"Error in spaceAPI." = "Error in spaceAPI.";
+
+"OK" = "OK";
+"Try again..." = "Try again...";
+"Error fetching Hackerspaces" = "Error fetching Hackerspaces";
+"The server providing the directory of spaceAPI listed Hackerspaces did not deliver expected data." = "The server providing the directory of spaceAPI listed Hackerspaces did not deliver expected data.";

@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>/dev/tal</key>
+	<string>http://www.devtal.de/api/</string>
+	<key>0.13</key>
+	<string>https://vspace.one/spaceapi.json</string>
+	<key>091 Labs</key>
+	<string>http://galileo.fedorapeople.org/status.json</string>
+	<key>57North Hacklab</key>
+	<string>http://57north.co/spaceapi</string>
+	<key>ACKspace</key>
+	<string>https://ackspace.nl/status.php</string>
+	<key>AFRA</key>
+	<string>http://geruempel.ddns.net/status.json</string>
+	<key>Ace Monster Toys</key>
+	<string>http://acemonstertoys.org/status.json</string>
+	<key>Apollo-NG</key>
+	<string>https://apollo.open-resource.org/status.php</string>
+	<key>Arch Reactor</key>
+	<string>https://spaceapi.net/new/space/arch_reactor_stl/status/json</string>
+	<key>Attraktor Makerspace</key>
+	<string>http://blog.attraktor.org/spaceapi/spaceapi.json</string>
+	<key>Awesome Space</key>
+	<string>http://awesomespace.nl/state/?show=api</string>
+	<key>Bastli</key>
+	<string>http://bastli.ch/hackspace_api.php</string>
+	<key>Bhack</key>
+	<string>http://api.bhack.nl/SpaceApi</string>
+	<key>BinarySpace</key>
+	<string>http://www.binaryspace.co.za/status/status.php</string>
+	<key>Bitlair</key>
+	<string>https://bitlair.nl/statejson.php</string>
+	<key>Breizh-Entropy</key>
+	<string>http://breizh-entropy.org/spaceapi.json</string>
+	<key>Brixel</key>
+	<string>http://space.visionsandviews.net/spaceapi/spaceapi.json</string>
+	<key>Bytespeicher</key>
+	<string>http://status.bytespeicher.org/status.json</string>
+	<key>C3D2 GCHQ</key>
+	<string>http://www.hq.c3d2.de/spaceapi.json</string>
+	<key>CADR</key>
+	<string>http://cadrspace.ru/status/json</string>
+	<key>CCC Frankfurt</key>
+	<string>https://status.ccc-ffm.de/spaceapi</string>
+	<key>CCC Hamburg</key>
+	<string>https://hamburg.ccc.de/dooris/status.json</string>
+	<key>CCCFr</key>
+	<string>http://cccfr.de/status/spaceapi.py</string>
+	<key>CSSA Common Room</key>
+	<string>https://spaceapi.net/new/space/cssa_common_room/status/json</string>
+	<key>Chaos Computer Club Hamburg e.V.</key>
+	<string>http://hamburg.ccc.de/dooris/status.json</string>
+	<key>Chaos Darmstadt</key>
+	<string>http://api.chaos-darmstadt.de/json</string>
+	<key>Chaos inKL.</key>
+	<string>http://spaceapi.net/status/Chaos+inKL.</string>
+	<key>ChaosStuff</key>
+	<string>http://spaceapi.c3l.lu/status.json</string>
+	<key>Chaosconsulting</key>
+	<string>http://chaos-consulting.de/api/space.api</string>
+	<key>Chaosdorf</key>
+	<string>https://chaosdorf.de/space_api.json</string>
+	<key>Chaospott</key>
+	<string>http://status.chaospott.de/status.json</string>
+	<key>Chaostreff Chemnitz</key>
+	<string>https://chaoschemnitz.de/chch.json</string>
+	<key>Chaostreff Dortmund</key>
+	<string>http://status.ctdo.de/api/spaceapi/v13</string>
+	<key>Chaostreff Recklinghausen c3RE</key>
+	<string>http://doorstatus.c3re.de/status/json</string>
+	<key>Chaostreff Salzburg</key>
+	<string>https://spaceapi.sbg.chaostreff.at/status/json</string>
+	<key>Chaostreff-Dortmund</key>
+	<string>http://www.chaostreff-dortmund.de/spaceapi.php</string>
+	<key>Codersfield</key>
+	<string>https://space.codersfield.com/status</string>
+	<key>CommonGround</key>
+	<string>http://status.cccmz.de/api/SpaceAPI</string>
+	<key>DevLoL</key>
+	<string>https://devlol.org/status/hackerspaceapi/</string>
+	<key>Die foobar</key>
+	<string>http://foobarstatus.nomoketo.de/status.json</string>
+	<key>Dingfabrik</key>
+	<string>http://dingfabrik.de/status/spaceapi.php</string>
+	<key>Dlabs Hackerspace</key>
+	<string>http://www.dlabs.co/api.php</string>
+	<key>Don't Panic</key>
+	<string>https://spaceapi.net/new/space/don_t_panic/status/json</string>
+	<key>E5</key>
+	<string>https://spaceapi.net/new/space/e5/status/json</string>
+	<key>Edinburgh Hacklab</key>
+	<string>http://spaceapi.edinburghhacklab.com/spaceapi.json</string>
+	<key>Eigenbaukombinat Halle e.V.</key>
+	<string>https://spaceapi.net/new/space/eigenbaukombinat_halle_e_v_/status/json</string>
+	<key>Embassy of Nerdistan</key>
+	<string>http://embassy.ccchb.de/status.json</string>
+	<key>Entropia</key>
+	<string>http://club.entropia.de/spaceapi</string>
+	<key>Estação H4ck3r</key>
+	<string>https://spaceapi.net/new/space/esta_o_h4ck3r/status/json</string>
+	<key>FAU FabLab</key>
+	<string>https://fablab.fau.de/spaceapi.php</string>
+	<key>FIXME</key>
+	<string>https://fixme.ch/cgi-bin/spaceapi.py</string>
+	<key>FabLab Neustadt a. d. Aisch - Bad Windsheim</key>
+	<string>https://www.fablab-nea.de/status/json</string>
+	<key>FabLab Nürnberg</key>
+	<string>http://api.fablab-nuernberg.de/spaceapi.php</string>
+	<key>FamiLAB</key>
+	<string>http://familab.org/status/status.php</string>
+	<key>Farset Labs</key>
+	<string>http://unit1.farsetlabs.org.uk/spaceapi/space/</string>
+	<key>FizzPOP</key>
+	<string>https://fizzpop.datenzone.de/api/status</string>
+	<key>Foomatic</key>
+	<string>http://foomatic.org/spaceapi/status</string>
+	<key>Frack</key>
+	<string>http://frack.nl/spacestate/?api</string>
+	<key>Freies Labor</key>
+	<string>https://freieslabor.org/api/info</string>
+	<key>Freiraum</key>
+	<string>http://hackerspace-ulm.de/status.json</string>
+	<key>GarageLab e.V.</key>
+	<string>http://94.79.144.122/status.json</string>
+	<key>Garaj</key>
+	<string>http://api.garaj.co/spaceapi</string>
+	<key>Garoa Hacker Clube</key>
+	<string>https://garoahc.appspot.com/status</string>
+	<key>GeekLabs</key>
+	<string>http://spaceapi.geeklabs.dk/?format=json</string>
+	<key>Gothemburg Hackerspace</key>
+	<string>https://spaceapi.net/new/space/gothemburg_hackerspace/status/json</string>
+	<key>H.A.C.K.</key>
+	<string>http://vsza.hu/hacksense/spaceapi_status.json</string>
+	<key>HAUM</key>
+	<string>https://spaceapi.net/new/space/haum/status/json</string>
+	<key>HSBNE</key>
+	<string>http://api.hsbne.org/json</string>
+	<key>HSBXL | Hackerspace Brussel</key>
+	<string>http://api.hsbxl.be/</string>
+	<key>HSBXL | Hackerspace Brusselsss</key>
+	<string>http://api.hsbxl.be/status</string>
+	<key>HSMTY</key>
+	<string>http://api.hsmty.org/status.json</string>
+	<key>HTU Graz - Basisgruppe Informatik</key>
+	<string>http://edv-support.htu.tugraz.at/doorothy/bis/status.spaceapi</string>
+	<key>HTU Graz - Basisgruppe Telematik</key>
+	<string>http://edv-support.htu.tugraz.at/doorothy/bagru/status.spaceapi</string>
+	<key>HTU Graz - E-Lab</key>
+	<string>http://edv-support.htu.tugraz.at/doorothy/elab/status.spaceapi</string>
+	<key>HacDC</key>
+	<string>http://api.hacdc.org/status.php</string>
+	<key>Hack42</key>
+	<string>http://hack42.nl/spacestate/json.php</string>
+	<key>HackLabAsu</key>
+	<string>https://spaceapi.net/new/space/hacklabasu/status/json</string>
+	<key>Hackburg</key>
+	<string>http://www.hackburg.ch/status.json</string>
+	<key>HackerGarage</key>
+	<string>http://hackergarage.mx/archivos/spaceapi/spaceapi.json</string>
+	<key>Hackeriet</key>
+	<string>http://spaceapi.hackeriet.no/hackeriet.spaceapi.json</string>
+	<key>Hackerspace Bielefeld e.V.</key>
+	<string>http://hackerspace-bielefeld.de/status.json</string>
+	<key>Hackerspace Bremen e.V.</key>
+	<string>http://hackerspacehb.appspot.com/status</string>
+	<key>Hackerspace KRK</key>
+	<string>http://hskrk-spacemon.herokuapp.com</string>
+	<key>Hackerspace Monterrey</key>
+	<string>http://hsmty.org/status.json</string>
+	<key>Hackerspace Pardubice</key>
+	<string>https://spaceapi.net/new/space/hspce/status/json</string>
+	<key>Hackerspace Valencia</key>
+	<string>https://spaceapi.net/new/space/hackerspace_valencia/status/json</string>
+	<key>Hackerspace.gr</key>
+	<string>http://www.hackerspace.gr/spaceapi</string>
+	<key>Hackerspace.sg</key>
+	<string>http://cam.hackerspace.sg/space/</string>
+	<key>Hacklab Kika</key>
+	<string>http://status.spodeli.org/space.json</string>
+	<key>Hacklabor</key>
+	<string>http://hacklabor.de/spaceapi.json</string>
+	<key>Hacksaar</key>
+	<string>http://spaceapi.hacksaar.de/status.json</string>
+	<key>Hacksburg</key>
+	<string>http://wiki.hacksburg.org/status.json</string>
+	<key>Hackspace Manchester</key>
+	<string>http://spaceapi.hacman.org.uk/</string>
+	<key>Hackspace Siegen</key>
+	<string>http://spaceapi.hasi.it/</string>
+	<key>Hackspace-Jena</key>
+	<string>http://status.hackspace-jena.de/api/</string>
+	<key>HeatSync Labs</key>
+	<string>http://intranet.heatsynclabs.org/~access/cgi-bin/spaceapi.rb</string>
+	<key>Heidelberg Makerspace</key>
+	<string>https://heidelberg-makerspace.de/status.json</string>
+	<key>Hickerspace</key>
+	<string>http://hickerspace.org/api/info/</string>
+	<key>Hive13</key>
+	<string>http://www.hive13.org/isOpen/api.php</string>
+	<key>IT-Syndikat</key>
+	<string>http://it-syndikat.org/status.php</string>
+	<key>Istanbul Hackerspace</key>
+	<string>https://istanbulhs.org/api/spaceapi</string>
+	<key>Jeanne D'Hack</key>
+	<string>http://spaceapi.net/cache/Jeanne+D%27Hack</string>
+	<key>K4CG</key>
+	<string>http://spaceapi.k4cg.org/spaceapi.json</string>
+	<key>Kamloops MakerSpace</key>
+	<string>https://spaceapi.net/new/space/kamloops_makerspace/status/json</string>
+	<key>Krautspace</key>
+	<string>http://status.krautspace.de/api</string>
+	<key>Kwartzlab Makerspace</key>
+	<string>http://at.kwartzlab.ca/spaceapi</string>
+	<key>LAG</key>
+	<string>http://state.laglab.org/spaceapi.json</string>
+	<key>LabHacker SP</key>
+	<string>http://apps.thacker.com.br/lab/json/status.json</string>
+	<key>Laboratoire Ouvert Grenoblois</key>
+	<string>https://www.logre.eu/spaceapi.json</string>
+	<key>Laboratorio Hacker de Campinas</key>
+	<string>http://lhc.net.br/spacenet.json</string>
+	<key>Laboratório Hacker</key>
+	<string>http://status.laboratoriohacker.org/status/json</string>
+	<key>Lamba Labs</key>
+	<string>http://status.lambalabs.org/public.php</string>
+	<key>Le Loop</key>
+	<string>http://spaceapi.leloop.org/status.json</string>
+	<key>LearnObots HackerSpace</key>
+	<string>http://spaceapi.net/new/space/learnobots_hackerspace/status/json</string>
+	<key>Leeds Hackspace</key>
+	<string>http://www.leedshackspace.org.uk/status.php</string>
+	<key>LeineLab</key>
+	<string>http://leinelab.net/api/spaceapi.json</string>
+	<key>Level2</key>
+	<string>https://www.hackerspace.lu/od/</string>
+	<key>Liege Hackerspace</key>
+	<string>http://lghs.be/api/</string>
+	<key>London Hackspace</key>
+	<string>https://london.hackspace.org.uk/spaceapi</string>
+	<key>LosFuzzysLab</key>
+	<string>https://spaceapi.net/new/space/losfuzzyslab/status/json</string>
+	<key>Mainframe</key>
+	<string>http://status.mainframe.io/api/spaceInfo</string>
+	<key>Make, Hack, Void Canberra</key>
+	<string>http://space.makehackvoid.com/status</string>
+	<key>MakeHackVoid Canberra</key>
+	<string>http://makehackvoid.com/spaceapi.json</string>
+	<key>MakeSpaceMadrid</key>
+	<string>https://spaceapi.net/new/space/makespacemadrid/status/json</string>
+	<key>MakerSpace Nanaimo</key>
+	<string>http://data.makerspacenanaimo.org/data.asmx/GetData</string>
+	<key>Makers Local 256</key>
+	<string>https://256.makerslocal.org/status.json</string>
+	<key>Maschinendeck</key>
+	<string>http://state.maschinendeck.org/spaceapi.json</string>
+	<key>Maschinenraum</key>
+	<string>http://api.maschinenraum.tk/status.json</string>
+	<key>Matehackers</key>
+	<string>http://mateaberto.herokuapp.com/status.json</string>
+	<key>MechArtLab</key>
+	<string>http://spaceapi.net/status/MechArtLab</string>
+	<key>Melbourne Makerspace</key>
+	<string>http://spaceapi.net/cache/Melbourne+Makerspace</string>
+	<key>MetaMeute</key>
+	<string>http://status.metameute.de/spaceapi.json</string>
+	<key>Metalab</key>
+	<string>https://metalab.at/spaceapi.json</string>
+	<key>MidsouthMakers</key>
+	<string>http://midsouthmakers.org/spaceapi/</string>
+	<key>Mikkeli Hacklab</key>
+	<string>http://mikkeli.hacklab.fi/spaceapi/hacklabmikkeli.json</string>
+	<key>Milwaukee Makerspace</key>
+	<string>http://apps.2xlnetworks.net/milwaukeemakerspace/</string>
+	<key>Minsk Hackerspace</key>
+	<string>http://hackerspace.by/spaceapi</string>
+	<key>MuCCC</key>
+	<string>http://api.muc.ccc.de/spaceapi.json</string>
+	<key>Munich Maker Lab</key>
+	<string>http://status.munichmakerlab.de/spaceapi.php</string>
+	<key>NURDSpace</key>
+	<string>http://space.nurdspace.nl/spaceapi/status.json</string>
+	<key>Netz39</key>
+	<string>http://spaceapi.n39.eu/json</string>
+	<key>Netzladen</key>
+	<string>http://netzladen.org/api/status.json</string>
+	<key>Nicelab</key>
+	<string>http://blog.nicelab.org/?feed=spaceapi</string>
+	<key>Noisebridge</key>
+	<string>http://api.noisebridge.net/spaceapi/</string>
+	<key>Noklab</key>
+	<string>https://cccgoe.de/spaceapi.php</string>
+	<key>Nottinghack</key>
+	<string>http://lspace.nottinghack.org.uk/status/status.php</string>
+	<key>Nova Labs</key>
+	<string>http://nova-labs.org/api/</string>
+	<key>Open Space Aarhus</key>
+	<string>http://spaceapi.osaa.dk/status/json</string>
+	<key>OpenLab</key>
+	<string>http://api.openlab-augsburg.de/data.json</string>
+	<key>P'yŏngyang Hackerspace</key>
+	<string>http://status.pyongyanghackerspace.org/jiwi.json</string>
+	<key>P-Space</key>
+	<string>http://pspace.dyndns.org/space.php</string>
+	<key>Pangloss Labs #1</key>
+	<string>http://spaceapi.panglosslabs.org/spaceapi.json</string>
+	<key>Perth Artifactory</key>
+	<string>http://space.artifactory.org.au/spaceapi.json</string>
+	<key>Pixelbar</key>
+	<string>https://www.pixelbar.nl/backend/spaceapi.json.php</string>
+	<key>Politecnico Open unix Lab</key>
+	<string>http://www.spaceapi.net/new/space/politecnico_open_unix_lab/status/json</string>
+	<key>Post Tenebras Lab</key>
+	<string>http://www.posttenebraslab.ch/status/status.json</string>
+	<key>PotentialLabs</key>
+	<string>https://spaceapi.net/new/space/potentiallabs/status/json</string>
+	<key>PotteriesHackspace</key>
+	<string>https://spaceapi.net/new/space/potterieshackspace/status/json</string>
+	<key>Progressbar</key>
+	<string>http://spaceapi.net/status/Progressbar</string>
+	<key>ProjectKitchen</key>
+	<string>https://spaceapi.net/new/space/projectkitchen/status/json</string>
+	<key>Pumping Station: One</key>
+	<string>http://spacemon.pumpingstationone.org:8000/spaceapi/ps1</string>
+	<key>Quelab</key>
+	<string>http://quelab.atomickiva.net/spaceapi.test</string>
+	<key>Randomdata</key>
+	<string>http://randomdata.nl/hsapi.php</string>
+	<key>Raul Hacker Club</key>
+	<string>https://spaceapi.net/new/space/raul_hacker_club/status/json</string>
+	<key>RaumZeitLabor</key>
+	<string>http://cosm.tiefpunkt.com/infoscreen/spaceapi.php</string>
+	<key>Reaktor 23</key>
+	<string>http://spaceapi.reaktor23.org/spaceapi</string>
+	<key>Recompile</key>
+	<string>http://www.recompile.se/spaceapi</string>
+	<key>RevSpace</key>
+	<string>http://revspace.nl/status/status.php</string>
+	<key>SMART Lab</key>
+	<string>https://spaceapi.net/new/space/smart_lab/status/json</string>
+	<key>SYNHAK</key>
+	<string>https://synhak.org/auth/status.json</string>
+	<key>Sabugosa</key>
+	<string>http://sjchackerclube.com.br/status/get_json.php</string>
+	<key>Salzburg</key>
+	<string>https://spaceapi.sbg.chaostreff.at/status/json</string>
+	<key>Sk1llz</key>
+	<string>http://sk1llz.nl/spaceapi.php</string>
+	<key>Starship Factory</key>
+	<string>http://spaceapi.apis.starship-factory.ch/api/spaceapi</string>
+	<key>Stgo MakerSpace</key>
+	<string>https://spaceapi.net/new/space/stgo_makerspace/status/json</string>
+	<key>Stratum 0</key>
+	<string>http://status.stratum0.org/status.json</string>
+	<key>Sudo Room</key>
+	<string>http://api.sudoroom.org/status.json</string>
+	<key>Swansea Hackspace</key>
+	<string>http://swansea.hackspace.org.uk/spaceapi.php</string>
+	<key>TOG</key>
+	<string>http://tog.ie/cgi-bin/space</string>
+	<key>Taipei Hackerspace</key>
+	<string>https://taipeihack.org/spaceapi</string>
+	<key>Tampere Hacklab 5w</key>
+	<string>http://5w.fi/spaceapi.json</string>
+	<key>Tangleball</key>
+	<string>http://www.tangleball.org.nz/wiki/index.php/Space_API?action=raw</string>
+	<key>Tarlab</key>
+	<string>http://tarlab.fi/spaceapi/space.api</string>
+	<key>Tarrafa Hacker Clube</key>
+	<string>http://tarrafa.net/spaceapi.json</string>
+	<key>TechTonik Labs</key>
+	<string>https://raw.github.com/sbhackerspace/sbhx-spaceapi/master/spaceapi.json</string>
+	<key>Technologia Incognita</key>
+	<string>http://techinc.nl/space/spacestate.json</string>
+	<key>Terminal.21 Basislager</key>
+	<string>http://api.terminal21.de</string>
+	<key>Tetalab</key>
+	<string>http://status.tetalab.org/status.json</string>
+	<key>The Bodgery</key>
+	<string>http://thebodgery.org/bodgery_space.cgi</string>
+	<key>Tink3rLab</key>
+	<string>http://tink3r.org/status/?api</string>
+	<key>TkkrLab</key>
+	<string>http://tkkrlab.nl/statejson.php</string>
+	<key>Triangulo Hackerspace</key>
+	<string>http://spaceapi.triangulohackerspace.net.br/spaceapi.json</string>
+	<key>Umeå Hackerspace</key>
+	<string>http://umeahackerspace.se:12345/spaceapi.json</string>
+	<key>Unallocated Space</key>
+	<string>http://www.uasstatus.com/spaceapi.json</string>
+	<key>UrLab</key>
+	<string>http://api.urlab.be/spaceapi/</string>
+	<key>Vaasa Hacklab</key>
+	<string>http://dyn.vaasa.hacklab.fi:38000/spaceapi/spaceapi.json</string>
+	<key>Verr's Space</key>
+	<string>https://spaceapi.net/new/space/verr/status/json</string>
+	<key>VoidWarranties</key>
+	<string>http://spaceapi.voidwarranties.be</string>
+	<key>Warpzone e.V.</key>
+	<string>https://www.warpzone.ms/api/spaceapi.php</string>
+	<key>Warsaw Hackerspace</key>
+	<string>https://hackerspace.pl/spaceapi</string>
+	<key>Wolfplex Hackerspace</key>
+	<string>http://api.wolfplex.be/space</string>
+	<key>Xerocraft</key>
+	<string>http://www.xerocraft.org/spaceapi.php</string>
+	<key>York Hackspace</key>
+	<string>https://spaceapi.net/new/space/york_hackspace/status/json</string>
+	<key>[hsmr]</key>
+	<string>http://hsmr.cc/spaceapi.json</string>
+	<key>backspace</key>
+	<string>http://status.bckspc.de/spacestatus.php</string>
+	<key>base48</key>
+	<string>http://48.io/status/</string>
+	<key>brmlab</key>
+	<string>http://nat.brmlab.cz/brmd/brmstatus.json</string>
+	<key>bytewerk</key>
+	<string>http://stats.bytewerk.org/status.json</string>
+	<key>c-base</key>
+	<string>http://www.c-base.org/status.json</string>
+	<key>cccmzwi</key>
+	<string>https://status.cccmz.de/api/space</string>
+	<key>chaostreff Chemnitz</key>
+	<string>https://chaoschemnitz.de/chch.json</string>
+	<key>coredump</key>
+	<string>http://status.coredump.ch</string>
+	<key>flipdot</key>
+	<string>https://raw.githubusercontent.com/kssoz/node-flipdot/1cda584a4c0ba474fe46678bc5a63070c1f598c5/spaceapi.json</string>
+	<key>fnordeingang</key>
+	<string>https://status.fnordeingang.de/spaceapi.json</string>
+	<key>hacklab01</key>
+	<string>http://lab.shit.la/spaceapi/spaceapi.json</string>
+	<key>hacklabbo</key>
+	<string>http://isopen.hacklabbo.indivia.net/hacklabbo/space.json</string>
+	<key>hackzogtum</key>
+	<string>http://mmisc.de/~legion/spaceApiEndpoint/index.php</string>
+	<key>init Lab</key>
+	<string>https://fauna.initlab.org/spaceapi/status.json</string>
+	<key>mag.lab</key>
+	<string>https://state.maglab.space/spaceapi.json</string>
+	<key>miLKlabs</key>
+	<string>http://status.mlkl.bz/json</string>
+	<key>nbsp</key>
+	<string>http://nobreakspace.org/status/spaceapi.json</string>
+	<key>nordlab e. V.</key>
+	<string>http://nordlab-ev.de/spaceapi.php</string>
+	<key>realraum</key>
+	<string>http://realraum.at/status.json</string>
+	<key>ruum42</key>
+	<string>https://ruum42.ch/spaceapi/</string>
+	<key>shackspace - stuttgart hackerspace</key>
+	<string>http://shackspace.de/spaceapi-query-0.13</string>
+	<key>spaceleft</key>
+	<string>http://www.space-left.org/spaceapi13.json</string>
+	<key>sublab</key>
+	<string>http://sublab.org/status.json</string>
+	<key>turmlabor</key>
+	<string>http://www.turmlabor.de/spaces.api</string>
+	<key>vspace.one</key>
+	<string>http://vspace.one/spaceapi.json</string>
+	<key>weinhof9</key>
+	<string>http://weinhof9.de/?feed=spaceapi</string>
+</dict>
+</plist>

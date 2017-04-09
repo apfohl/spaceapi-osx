@@ -13,14 +13,14 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <menu id="536">
             <items>
-                <menuItem title="Space: no space selected" id="537">
+                <menuItem title="Space: Kein Space ausgewählt" id="537">
                     <modifierMask key="keyEquivalentModifierMask"/>
                 </menuItem>
-                <menuItem title="Space: no message" id="7vg-aY-J2o">
+                <menuItem title="Space: Keine Statusmeldung" id="7vg-aY-J2o">
                     <modifierMask key="keyEquivalentModifierMask"/>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="540"/>
-                <menuItem title="Update Status …" keyEquivalent="r" id="538">
+                <menuItem title="Aktualisieren …" keyEquivalent="r" id="538">
                     <connections>
                         <action selector="actionUpdateStatus:" target="544" id="xLa-hp-aP8"/>
                     </connections>
@@ -29,28 +29,28 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Hackerspaces" id="554">
                         <items>
-                            <menuItem title="No spaces available." id="555">
+                            <menuItem title="Keine Hackerspaces geladen." id="555">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem isSeparatorItem="YES" id="z0H-Vc-sgf"/>
-                <menuItem title="Preferences …" keyEquivalent="," id="541">
+                <menuItem isSeparatorItem="YES" id="LSo-Hz-FtO"/>
+                <menuItem title="Einstellungen …" keyEquivalent="," id="541">
                     <connections>
                         <action selector="actionShowPreferencePanel:" target="544" id="Qlt-7T-B4f"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Quit" keyEquivalent="q" id="542">
+                <menuItem title="Beenden" keyEquivalent="q" id="542">
                     <connections>
                         <action selector="terminate:" target="-3" id="543"/>
                     </connections>
                 </menuItem>
-                <menuItem isSeparatorItem="YES" id="Fag-aR-vxk"/>
-                <menuItem title="About" id="pww-JS-oFp">
+                <menuItem isSeparatorItem="YES" id="2oS-w1-TeO"/>
+                <menuItem title="About" id="9I5-NA-Zh8">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="actionShowAbout:" target="544" id="hNO-w3-jRF"/>
+                        <action selector="actionShowAbout:" target="544" id="422-V6-Nvg"/>
                     </connections>
                 </menuItem>
                 <menuItem title="Version" id="NPI-hU-FUu">

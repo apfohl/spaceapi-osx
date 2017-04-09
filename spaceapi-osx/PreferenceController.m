@@ -1,53 +1,46 @@
 //
-//  SAPIPreferenceController.m
+//  PreferenceController.m
 //  SpaceAPI
 //
 //  Created by Andreas Pfohl on 28.06.13.
 //  Copyright (c) 2013 Andreas Pfohl. All rights reserved.
 //
 
-#import "SAPIPreferenceController.h"
+#import "PreferenceController.h"
 
 NSString * const SAPIUpdateIntervalKey = @"SAPIUpdateInterval";
 NSString * const SAPISelectedSpaceKey = @"SAPIUpdateSelectedSpace";
 
-@implementation SAPIPreferenceController
+@implementation PreferenceController
 
-+ (long)updateInterval
-{
++ (long) updateInterval {
     return [[NSUserDefaults standardUserDefaults] integerForKey:SAPIUpdateIntervalKey];
 }
 
-+ (void)setUpdateInterval:(long)interval
-{
++ (void) setUpdateInterval:(long)interval {
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:interval] forKey:SAPIUpdateIntervalKey];
 }
 
-+ (NSString *)selectedSpace
-{
++ (NSString*) selectedSpace {
     return [[NSUserDefaults standardUserDefaults] stringForKey:SAPISelectedSpaceKey];
 }
 
-+ (void)setSelectedSpace:(NSString *)spaceName
-{
++ (void) setSelectedSpace:(NSString *)spaceName {
     [[NSUserDefaults standardUserDefaults] setObject:spaceName forKey:SAPISelectedSpaceKey];
 }
 
-- (id)init
-{
+- (id) init {
     self = [super initWithWindowNibName:@"Preferences"];
     return self;
 }
 
-- (IBAction)changeUpdateInterval:(NSTextField *)sender
-{
-    [SAPIPreferenceController setUpdateInterval:[self.intervalField integerValue]];
+- (IBAction) actionChangeUpdateInterval:(NSTextField *)sender {
+    [PreferenceController setUpdateInterval:[self.intervalField integerValue]];
 }
 
-- (void)windowDidLoad {
+- (void) windowDidLoad {
     [super windowDidLoad];
-
-    [self.intervalField setStringValue:[NSString stringWithFormat:@"%li", [SAPIPreferenceController updateInterval]]];
+    [self.intervalField setStringValue:[NSString stringWithFormat:@"%li", [PreferenceController updateInterval]]];
 }
 
 @end

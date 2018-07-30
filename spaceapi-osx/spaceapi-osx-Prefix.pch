@@ -22,7 +22,7 @@
 #endif
 
 // URLS
-#define kURL_SPACE_DIRECTORY                            @"http://spaceapi.net/directory.json"
+#define kURL_SPACE_DIRECTORY                            @"https://spaceapi.fixme.ch/directory.json"
 
 // LOGGING
 #define LOG( someString, ... )                          if( DEBUG ) NSLog( someString, ##__VA_ARGS__ )
